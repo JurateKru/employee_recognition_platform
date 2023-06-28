@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'goals_management',
+    'user_profile',
     'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,6 +121,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR.joinpath(STATIC_URL)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR.joinpath(MEDIA_URL)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
