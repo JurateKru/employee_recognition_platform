@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    {% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+    <script src="https://kit.fontawesome.com/a4117eb1fb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+        <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}">Home</a>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main> 
+
+    <footer><p>&copy; 2023 Goals Management Platform</p></footer>
+</body>
+</html>

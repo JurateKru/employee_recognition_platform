@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'goals_management',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Vilnius'
 
 USE_I18N = True
 
@@ -118,8 +119,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR.joinpath(STATIC_URL)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': 1120,
+    'cleanup_on_startup': False,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'plugins': '''
+            textcolor link image media preview codesample contextmenu
+            table code lists insertdatetime nonbreaking
+            directionality searchreplace wordcount visualblocks
+            visualchars autolink charmap print hr anchor pagebreak
+            ''',
+    'toolbar1': '''
+            bold italic underline | forecolor backcolor | alignleft alignright
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link anchor | image media | codesample |
+            visualblocks visualchars | charmap hr pagebreak nonbreaking | code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}
