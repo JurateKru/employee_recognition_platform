@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Delete goal {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Confirm Goal Deleting </h1>
+<p><b>Goal # </b>#{{ goal.id }}
+<br><b>Goal:</b> {{ goal.title }}
+<br><b>Priority:</b> {{ goal.priority }}
+<form action="{{ request.path }}" method="post">
+    {% csrf_token %}
+    <h3>Delete?</h3>
+    <button class="button" type="submit">Yes</button>
+    <a class="button" href="{% url 'goal_detail' goal.pk %}">No</a>
+</form>
+{% endblock content %}
