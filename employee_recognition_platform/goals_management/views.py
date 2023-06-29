@@ -1,5 +1,5 @@
 from typing import Any, Dict
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.forms.models import BaseModelForm
@@ -45,4 +45,15 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.owner = self.request.user
         messages.success(self.request, _('Goal is created successfully!'))
         return super().form_valid(form)
+    
+
+class GoalDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Goal
+    template_name = 'goals_management/goal_detail.html' 
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['goal'] = get_object_or_404(Goal, id=self.kwargs['pk'])
+        return context  
+    
 

@@ -6,28 +6,28 @@
 <div class= "requests">
     <h1>My Goals:</h1>
     {% if goal_list %}
-    <ul>
+    <ul> 
         {% for goal in goal_list %}
-            <li>Goal: #{{ goal.id }}, {{goal.title}}
+            <li><a href="{% url 'goal_detail' goal.pk %}">Goal: #{{ goal.id }}, {{goal.title}}</a>
                 <br><i> Status - </i>
                 {% if goal.status == 0 %} 
-                <span style="color: orange;"><strong> Planned</strong></span>
+                    <span style="color: orange;"><strong> Planned</strong></span>
                 {% elif goal.status == 1 %} 
-                <span style="color: rgb(35, 80, 186);"><strong> In progress</strong></span>
+                    <span style="color: rgb(35, 80, 186);"><strong> In progress</strong></span>
                 {% elif goal.status == 2 %} 
-                <span style="color: green;"><strong> Complete</strong></span>
+                    <span style="color: green;"><strong> Complete</strong></span>
                 {% elif goal.status == 3 %} 
-                <span style="color: grey;"><strong> On hold</strong></span>
+                    <span style="color: grey;"><strong> On hold</strong></span>
                 {% elif goal.status == 4 %} 
-                <span style="color: red;"><strong> Cancelled</strong></span>
+                    <span style="color: red;"><strong> Cancelled</strong></span>
                 {% else %}
                 {% endif %}
             </li>
         {% endfor %} 
     </ul>
     {% else %}
-    <p>No goals found</p>
+        <p>No goals found</p>
     {% endif %}
-    <a class='button' href="{% url 'create_goal' %}"><strong>Create Goal<strong></a>
+        <a class='button' href="{% url 'create_goal' %}"><strong>Create Goal<strong></a>
 {% endblock content %}
 </div>
