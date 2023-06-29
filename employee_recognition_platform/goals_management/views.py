@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.forms.models import BaseModelForm
+from django.db.models import Q
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -16,6 +17,18 @@ def index(request):
 
 def ismart(request):
     return render(request, 'goals_management/ismart.html')
+
+
+class GoalListView(generic.ListView):
+    model = Goal
+    template_name = 'goals_management/goal_list.html'
+    context_object_name = 'goal_list'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        return qs.filter(owner=user)
+
 
 class GoalCreateView(LoginRequiredMixin, generic.CreateView):
     model = Goal
