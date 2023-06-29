@@ -6,7 +6,7 @@
 <div class= "requests">
     <h1>My Goals:</h1>
     {% if goal_list %}
-    <ul>
+    <ul> 
         {% for goal in goal_list %}
             <li><a href="{% url 'goal_detail' goal.pk %}">Goal: #{{ goal.id }}, {{goal.title}}</a>
                 <br><i> Status - </i>

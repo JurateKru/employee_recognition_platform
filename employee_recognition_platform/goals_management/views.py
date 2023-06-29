@@ -54,6 +54,6 @@ class GoalDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['goal'] = get_object_or_404(Goal, id=self.kwargs['pk'])
-        return context
+        return context  
     
 
