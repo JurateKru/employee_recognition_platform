@@ -3,6 +3,10 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.utils.timezone import now
 from tinymce.models import HTMLField
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
     
 
 class Manager(models.Model):
@@ -78,6 +82,13 @@ class Goal(models.Model):
     description = HTMLField(_("description"), max_length=2000, db_index=True, blank=True, null=True)
     start_date = models.DateField(_("start date"), auto_now=False, auto_now_add=False, default= now)
     end_date = models.DateField(_("end date"), auto_now=False, null=True, blank=True)
+    owner = models.ForeignKey(
+        User,
+        verbose_name=_("owner"),
+        on_delete=models.CASCADE,
+        related_name="goal_owner",
+        null=True, blank=True,
+        )
 
     PRIORITY_CHOICES = (
         (0, _('High')),
