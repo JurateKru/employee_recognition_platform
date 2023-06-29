@@ -15,7 +15,7 @@ class Profile(models.Model):
         related_name='profile',
         null=True, blank=True,
     )
-    picture = models.ImageField(_("picture"), upload_to='user_profile/pictures')
+    picture = models.ImageField(_("picture"), upload_to='user_profile/pictures', null=True, blank=True,)
     employee = models.OneToOneField(
         Employee,
         verbose_name=_("employee profile"), 
@@ -58,7 +58,7 @@ class ManagerProfile(models.Model):
         related_name='manager_user_profile',
         null=True, blank=True,
     )
-    picture = models.ImageField(_("picture"), upload_to='user_profile/pictures')
+    picture = models.ImageField(_("picture"), upload_to='user_profile/pictures', null=True, blank=True,)
     manager = models.OneToOneField(
         Manager,
         verbose_name=_("manager profile"), 
