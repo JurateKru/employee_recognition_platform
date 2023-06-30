@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from . forms import GoalCreateForm, GoalUpdateForm
 from . models import Goal, Employee, Manager
 from user_profile.models import ManagerProfile
-from django.views.generic import ListView
+
 
 def index(request):
     return render(request, 'goals_management/index.html')
@@ -92,7 +92,7 @@ class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
     
 
 
-class DepartmentEmployeesListView(ListView):
+class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     template_name = 'goals_management/employees_list.html'
     context_object_name = 'employees'
 
@@ -100,3 +100,6 @@ class DepartmentEmployeesListView(ListView):
         manager = get_object_or_404(Manager, user=self.request.user)
         queryset = Employee.objects.filter(manager=manager)
         return queryset
+
+    def test_func(self) -> bool | None:
+        return hasattr(self.request.user, "manager")

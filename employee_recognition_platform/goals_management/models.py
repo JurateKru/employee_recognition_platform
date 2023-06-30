@@ -16,11 +16,11 @@ class Manager(models.Model):
     hire_date = models.DateField(_("hire date"), auto_now=False, auto_now_add=False, default=now)
     term_date = models.DateField(_("termination date"), auto_now=False, null=True, blank=True)
     department = models.CharField(_("department"), max_length=50)
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User,
         verbose_name=("user_profile"),
         on_delete=models.CASCADE,
-        related_name='manager_users',
+        related_name='manager',
         null=True,
         blank=True
     )    
