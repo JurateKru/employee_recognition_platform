@@ -146,3 +146,67 @@ class Goal(models.Model):
         return reverse("goal_detail", kwargs={"pk": self.pk})
 
 
+class Review(models.Model):
+    SCORE_CHOICES = (
+        (0, _('Nearly Meets Expectations')),
+        (8, _('Meets Expectations')),
+        (15, _('Exceeds Expectations')),
+    )
+    goals_achievment = HTMLField(_("goals achievment"), max_length=2000, db_index=True, blank=True, null=True)
+    goals_review = models.PositiveSmallIntegerField(
+        _("goals review"), 
+        choices=SCORE_CHOICES, 
+        default=0,
+        db_index=True
+    )
+    teamwork = HTMLField(_("teamwork"), max_length=2000, db_index=True, blank=True, null=True)
+    teamwork_review = models.PositiveSmallIntegerField(
+        _("teamwork review"), 
+        choices=SCORE_CHOICES, 
+        default=0,
+        db_index=True
+    )
+    innovation = HTMLField(_("innovation"), max_length=2000, db_index=True, blank=True, null=True)
+    innovation_review = models.PositiveSmallIntegerField(
+        _("innovation review"), 
+        choices=SCORE_CHOICES, 
+        default=0,
+        db_index=True
+    )
+    work_ethics = HTMLField(_("work ethics"), max_length=2000, db_index=True, blank=True, null=True)
+    work_ethics_review = models.PositiveSmallIntegerField(
+        _("work ethics review"), 
+        choices=SCORE_CHOICES, 
+        default=0,
+        db_index=True
+    )
+    total_review =models.PositiveSmallIntegerField(
+        _("total review"), 
+        choices=SCORE_CHOICES, 
+        default=0,
+        db_index=True
+    )
+    manager = models.ForeignKey(
+        User,
+        verbose_name=_("manager"),
+        on_delete=models.CASCADE,
+        related_name="reviews_manager",
+        null=True, blank=True,
+    )
+    employee = models.ForeignKey(
+        Employee,
+        verbose_name=_("employee"),
+        on_delete=models.CASCADE, 
+        related_name="rewiews",
+        null=True, blank=True,
+    )
+
+    class Meta:
+        verbose_name = _("review")
+        verbose_name_plural = _("reviews")
+
+    def __str__(self):
+        return f'{self.employee.first_name} {self.employee.last_name},{self.total_review}'
+
+    def get_absolute_url(self):
+        return reverse("review_detail", kwargs={"pk": self.pk})
