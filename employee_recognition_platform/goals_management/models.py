@@ -16,12 +16,18 @@ class Manager(models.Model):
     hire_date = models.DateField(_("hire date"), auto_now=False, auto_now_add=False, default=now)
     term_date = models.DateField(_("termination date"), auto_now=False, null=True, blank=True)
     department = models.CharField(_("department"), max_length=50)
-    
+    user = models.ForeignKey(
+        User,
+        verbose_name=("user_profile"),
+        on_delete=models.CASCADE,
+        related_name='manager_users',
+        null=True,
+        blank=True
+    )    
     STATUS_ACTIVITY = (
         (0, _('Active')),
         (1, _('Terminated'))
     )
-
     status = models.PositiveSmallIntegerField(
         _("status"), 
         choices=STATUS_ACTIVITY, 
@@ -53,6 +59,14 @@ class Employee(models.Model):
         on_delete=models.CASCADE, 
         related_name="employees",
         null=True, blank=True,
+    )
+    user = models.OneToOneField(
+        User,
+        verbose_name=_("user"),
+        on_delete=models.CASCADE,
+        related_name='employee',
+        null=True,
+        blank=True
     )
 
     STATUS_ACTIVITY = (

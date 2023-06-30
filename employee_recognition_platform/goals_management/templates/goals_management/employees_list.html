@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block title %}Department employees{% endblock title %}
+{% block content %}
+<div class= "requests">
+    <h1>Department employees</h1>
+    {% if employees_list %}
+    <ul>
+        {% for employee in employees_list %}
+            <li><a href="{% url 'employee_detail' employee.pk %}">Employee: {{ employee.first_name }} {{ employee.last_name}}</a></li>
+        {% endfor %} 
+    </ul>
+    {% else %}
+    <p>No employee found</p>
+    {% endif %}
+{% endblock content %}
+</div>

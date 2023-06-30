@@ -9,8 +9,9 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from . forms import GoalCreateForm, GoalUpdateForm
-from . models import Goal
-
+from . models import Goal, Employee, Manager
+from user_profile.models import ManagerProfile
+from django.views.generic import ListView
 
 def index(request):
     return render(request, 'goals_management/index.html')
@@ -90,3 +91,12 @@ class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
         return obj.owner == self.request.user  
     
 
+
+class DepartmentEmployeesListView(ListView):
+    template_name = 'goals_management/employees_list.html'
+    context_object_name = 'employees'
+
+    def get_queryset(self):
+        manager = get_object_or_404(Manager, user=self.request.user)
+        queryset = Employee.objects.filter(manager=manager)
+        return queryset

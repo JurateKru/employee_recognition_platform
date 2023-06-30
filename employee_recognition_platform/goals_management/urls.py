@@ -9,4 +9,5 @@ urlpatterns = [
     path('goal-list/my-goal/<int:pk>/update', views.GoalUpdateView.as_view(), name='update_goal'),
     path('goal-list/my-goal/<int:pk>/delete', views.GoalDeleteView.as_view(), name='goal_delete'),
     path('create-goal/', views.GoalCreateView.as_view(), name='create_goal'),
+    path('employees-list/', views.DepartmentEmployeesListView.as_view(), name='employees_list'),
 ] 
