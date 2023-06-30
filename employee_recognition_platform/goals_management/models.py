@@ -220,7 +220,7 @@ class Review(models.Model):
         verbose_name_plural = _("reviews")
 
     def __str__(self):
-        return f'{self.employee.first_name} {self.employee.last_name},{self.total_review}'
+        return f'{self.employee}, {self.total_review}'
 
     def get_absolute_url(self):
         return reverse("review_detail", kwargs={"pk": self.pk})

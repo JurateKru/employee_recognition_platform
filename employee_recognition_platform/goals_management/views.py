@@ -8,9 +8,8 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from . forms import GoalCreateForm, GoalUpdateForm
-from . models import Goal, Employee, Manager
-from user_profile.models import ManagerProfile
+from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm
+from . models import Goal, Employee, Manager, Review
 
 
 def index(request):
@@ -35,7 +34,7 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
     model = Goal
     form_class = GoalCreateForm
     template_name = 'goals_management/create_goal.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('goal_list')
 
     def get_initial(self) -> Dict[str, Any]:
         initial =  super().get_initial()
@@ -104,7 +103,7 @@ class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, gener
     def test_func(self) -> bool | None:
         return hasattr(self.request.user, "manager")
     
-    
+
 class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
     model = Employee
     template_name = 'goals_management/employee_detail.html' 
@@ -113,3 +112,22 @@ class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
         return context
+
+
+class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Review
+    form_class = ReviewCreateForm
+    template_name = 'goals_management/create_review.html'
+    success_url = reverse_lazy('employees_list')
+
+    def get_initial(self) -> Dict[str, Any]:
+        initial =  super().get_initial()
+        initial['manager'] = self.request.user
+        employee_id = self.request.GET.get('employee_id')
+        initial['employee'] = get_object_or_404(Employee, id=employee_id)
+        return initial
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.instance.manager = self.request.user
+        messages.success(self.request, _('Review is created successfully!'))
+        return super().form_valid(form)

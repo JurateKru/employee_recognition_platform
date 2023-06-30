@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Create Review{{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Add a review:</h1>
+<form method="post" action="{{ request.path }}?goal_id={{ goal.id }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm review</button>
+</form>
+{% endblock content %}
