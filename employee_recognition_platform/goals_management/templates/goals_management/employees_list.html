@@ -8,7 +8,7 @@
     {% if employees %}
     <ul>
         {% for employee in employees %}
-            <li>Employee: {{ employee.first_name }} {{ employee.last_name}}</li>
+            <li><a class='button' href="{% url 'employee_detail' employee.pk %}">Employee: {{ employee.first_name }} {{ employee.last_name}}</a></li>
         {% endfor %} 
     </ul>
     {% else %}
