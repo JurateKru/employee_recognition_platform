@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block title %}Employee Details{% endblock title %}
+{% block content %}
+<div class= "requests">
+    <h1>Employee details:</h1>
+    {% if employee %}
+    <ul>  
+        <li>#{{ employee.id }}. {{ employee.first_name}} {{ employee.last_name}}
+            <br><i> Email address - </i> {{ employee.email }}
+            <br><i> Position - </i> {{ employee.position }}
+            <br><i> Manager - </i> {{ employee.manager }}
+            <br><i> Hire date - </i> {{ employee.hire_date }}
+            <br><i> Status - </i> {{ employee.get_status_display }}
+            {% comment %} <br><img class="user-profile-picture" src="{{ user_.profile.picture.url }}"> {% endcomment %}
+        </li>
+    </ul>
+    {% else %}
+        <p>No employees found</p>
+    {% endif %}
+        <div class="parent-element">
+            <a class='button' href="{% url 'goal_detail' employee.pk %}"><strong>Review Goals<strong></a>
+        </div>
+</div>
+{% endblock content %}

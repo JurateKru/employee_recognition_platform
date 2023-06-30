@@ -103,3 +103,13 @@ class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, gener
 
     def test_func(self) -> bool | None:
         return hasattr(self.request.user, "manager")
+    
+    
+class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Employee
+    template_name = 'goals_management/employee_detail.html' 
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
+        return context
