@@ -201,7 +201,7 @@ class Review(models.Model):
         db_index=True
     )
     manager = models.ForeignKey(
-        User,
+        Manager,
         verbose_name=_("manager"),
         on_delete=models.CASCADE,
         related_name="reviews_manager",

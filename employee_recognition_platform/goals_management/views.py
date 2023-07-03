@@ -135,14 +135,26 @@ class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
 
     def get_initial(self) -> Dict[str, Any]:
         initial =  super().get_initial()
-        initial['manager'] = self.request.user
+        manager = get_object_or_404(Manager, user=self.request.user)
+        initial['manager'] = manager
         initial['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
         return initial
     
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.instance.manager = self.request.user
+        manager = get_object_or_404(Manager, user=self.request.user)
+        form.instance.manager = manager
         messages.success(self.request, _('Review is created successfully!'))
         return super().form_valid(form)
     
 
+class DepartmentReviewsListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+    template_name = 'goals_management/department_reviews.html'
+    context_object_name = 'departments_reviews'
+
+    def get_queryset(self):
+        queryset = Review.objects.filter(manager=self.request.user.manager)
+        return queryset
+
+    def test_func(self) -> bool | None:
+        return hasattr(self.request.user, "manager")
 
