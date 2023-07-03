@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}
+<link rel='stylesheet' href="{% static 'css/style.css' %}">
+{% endblock stylesheet %}
+{% block title %}Department reviews{% endblock title %}
+{% block content %}
+<div class="requests">
+    <h1>Department reviews</h1>
+    {% if department_reviews %}
+    <ul>
+        {% for review in department_reviews %}
+            <li>{{ review.employee }} {{ review.total_review }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reviews found</p>
+    {% endif %}
+</div>
+{% endblock content %}
