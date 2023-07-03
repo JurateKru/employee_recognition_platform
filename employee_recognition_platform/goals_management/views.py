@@ -90,7 +90,6 @@ class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
         return obj.owner == self.request.user  
     
 
-
 class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     template_name = 'goals_management/employees_list.html'
     context_object_name = 'employees'
@@ -98,6 +97,20 @@ class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, gener
     def get_queryset(self):
         manager = get_object_or_404(Manager, user=self.request.user)
         queryset = Employee.objects.filter(manager=manager)
+        return queryset
+
+    def test_func(self) -> bool | None:
+        return hasattr(self.request.user, "manager")
+    
+
+class DepartmentGoalsListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'goals_management/employee_goals_list.html'
+    context_object_name = 'goals'
+
+    def get_queryset(self):
+        manager = get_object_or_404(Manager, user=self.request.user)
+        employee = manager.employees.get(id=self.kwargs['pk'])
+        queryset = Goal.objects.filter(owner__employee=employee)
         return queryset
 
     def test_func(self) -> bool | None:
