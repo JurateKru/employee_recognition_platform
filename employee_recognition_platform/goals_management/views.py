@@ -136,11 +136,13 @@ class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
     def get_initial(self) -> Dict[str, Any]:
         initial =  super().get_initial()
         initial['manager'] = self.request.user
-        employee_id = self.request.GET.get('employee_id')
-        initial['employee'] = get_object_or_404(Employee, id=employee_id)
+        initial['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
         return initial
     
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.manager = self.request.user
         messages.success(self.request, _('Review is created successfully!'))
         return super().form_valid(form)
+    
+
+

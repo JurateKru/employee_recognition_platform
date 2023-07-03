@@ -8,10 +8,10 @@ urlpatterns = [
     path('employees-list/', views.DepartmentEmployeesListView.as_view(), name='employees_list'),
     path('employees-list/detail/<int:pk>', views.EmployeeDetailView.as_view(), name='employee_detail'),
     path('employees-list/detail/<int:pk>/goals/', views.DepartmentGoalsListView.as_view(), name='employee_goals_list'),
-    path('employees-list/detail/create-review/', views.ReviewCreateView.as_view(), name='create_review'),
+    path('employees-list/detail/<int:pk>/create-review/', views.ReviewCreateView.as_view(), name='create_review'),
     path('goal-list/my-goal/<int:pk>', views.GoalDetailView.as_view(), name='goal_detail'),
     path('goal-list/my-goal/<int:pk>/update', views.GoalUpdateView.as_view(), name='update_goal'),
     path('goal-list/my-goal/<int:pk>/delete', views.GoalDeleteView.as_view(), name='goal_delete'),
     path('create-goal/', views.GoalCreateView.as_view(), name='create_goal'),
     
-] 
+]

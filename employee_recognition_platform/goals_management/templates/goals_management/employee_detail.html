@@ -21,7 +21,7 @@
     {% endif %}
         <div class="parent-element">
             <a class='button' href="{% url 'employee_goals_list' employee.pk %}"><strong>Review Goals<strong></a>
-            <a class='button' href="{% url 'create_review' %}"><strong>Create Review<strong></a>
+            <a class='button' href="{% url 'create_review' employee.pk %}"><strong>Create Review<strong></a>
         </div>
 </div>
 {% endblock content %}
