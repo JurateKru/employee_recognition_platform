@@ -202,3 +202,14 @@ class ReviewDeleteView(LoginRequiredMixin, generic.DeleteView):
     def test_func(self) -> bool | None:
         obj = self.get_object()
         return obj.manager == self.request.user  
+
+
+class ReviewListView(generic.ListView):
+    model = Review
+    template_name = 'goals_management/review_list.html'
+    context_object_name = 'review_list'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        return qs.filter(employee__user=user)

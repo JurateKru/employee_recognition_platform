@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block title %}My Reviews{% endblock title %}
+{% block content %}
+<div class= "requests">
+    <h1>My Reviews:</h1>
+    {% if review_list %}
+    <ul> 
+        {% for review in review_list %}
+            <li><a href="{% url 'review_detail' review.pk %}">Review: #{{ review.employee }}, {{review.get_total_review_display}}</a></li>
+        {% endfor %} 
+    </ul>
+    {% else %}
+        <p>No review found</p>
+    {% endif %}
+{% endblock content %}
+</div>

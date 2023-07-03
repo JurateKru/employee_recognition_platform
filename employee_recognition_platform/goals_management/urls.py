@@ -13,6 +13,7 @@ urlpatterns = [
     path('goal-list/my-goal/<int:pk>/update', views.GoalUpdateView.as_view(), name='update_goal'),
     path('goal-list/my-goal/<int:pk>/delete', views.GoalDeleteView.as_view(), name='delete_goal'),
     path('create-goal/', views.GoalCreateView.as_view(), name='create_goal'),
+    path('review-list/', views.ReviewListView.as_view(), name='review_list'),
     path('department-reviews', views.DepartmentReviewsListView.as_view(), name='department_reviews'),
     path('department-reviews/detail/<int:pk>', views.ReviewDetailView.as_view(), name='review_detail'),
     path('department-reviews/detail/<int:pk>/update', views.ReviewUpdateView.as_view(), name='update_review'),

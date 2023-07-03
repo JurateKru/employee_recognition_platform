@@ -25,11 +25,11 @@
     {% else %}
         <p>No reviews found</p>
     {% endif %}
-    {% comment %} {% if  user == review.manager %} {% endcomment %}
+    {% if  user == review.manager.user %}
         <div class="parent-element">
             <a class='button' href="{% url 'update_review' review.pk %}"><strong>Update Review<strong></a>
             <a class='button' href="{% url 'delete_review' review.pk %}"><strong>Delete Review<strong></a>
         </div> 
-    {% comment %} {% endif %} {% endcomment %}
+    {% endif %}
 </div>
 {% endblock content %}
