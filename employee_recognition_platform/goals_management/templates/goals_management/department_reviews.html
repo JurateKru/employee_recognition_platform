@@ -10,7 +10,7 @@
     {% if department_reviews %}
     <ul>
         {% for review in department_reviews %}
-            <li>{{ review.employee }} {{ review.total_review }}</li>
+            <li><a href="{% url 'review_detail' review.pk %}">{{ review.employee }}, {{ review.get_total_review_display }}</a></li>
         {% endfor %}
     </ul>
     {% else %}

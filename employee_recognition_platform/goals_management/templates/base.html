@@ -31,9 +31,13 @@
         <a class="button" href="{% url 'logout' %}">Logout</a>
     {% endif %}
     <main>
-        {% block content %}
-        {% endblock content %}
-    
+        {% if messages %}
+            {% for message in messages %}
+                <p class="box box-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+            {% block content %}
+            {% endblock content %}
     </main> 
 
     <footer><p>&copy; 2023 Goals Managment System</p></footer>

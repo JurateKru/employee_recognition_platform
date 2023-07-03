@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm
+from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm, ReviewUpdateForm
 from . models import Goal, Employee, Manager, Review
 
 
@@ -78,7 +78,7 @@ class GoalDetailView(LoginRequiredMixin, generic.DetailView):
 
 class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Goal
-    template_name = 'goals_management/goal_delete.html'
+    template_name = 'goals_management/delete_goal.html'
     success_url = reverse_lazy('goal_list')
 
     def form_valid(self, form):
@@ -149,7 +149,7 @@ class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
 
 class DepartmentReviewsListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     template_name = 'goals_management/department_reviews.html'
-    context_object_name = 'departments_reviews'
+    context_object_name = 'department_reviews'
 
     def get_queryset(self):
         queryset = Review.objects.filter(manager=self.request.user.manager)
@@ -157,4 +157,48 @@ class DepartmentReviewsListView(LoginRequiredMixin, UserPassesTestMixin, generic
 
     def test_func(self) -> bool | None:
         return hasattr(self.request.user, "manager")
+    
 
+class ReviewDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Review
+    template_name = 'goals_management/review_detail.html' 
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['review'] = get_object_or_404(Review, id=self.kwargs['pk'])
+        return context
+
+
+class ReviewUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Review
+    form_class = ReviewUpdateForm
+    template_name = 'goals_management/update_review.html'
+    success_url = reverse_lazy('department_reviews')   
+
+    def get_initial(self):
+        initial = super().get_initial()
+        obj = self.get_object()
+        initial["goals achievment"] = obj.goals_achievment
+        initial["goals review"] = obj.goals_review
+        initial["teamwork"] = obj.teamwork
+        initial["teamwork review"] = obj.teamwork_review
+        initial["innovation"] = obj.innovation
+        initial["innovation_review"] = obj.innovation_review
+        initial["work ethics"] = obj.work_ethics
+        initial["work ethics review"] = obj.work_ethics_review
+        initial["total review"] = obj.total_review
+        return initial
+    
+
+class ReviewDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Review
+    template_name = 'goals_management/delete_review.html'
+    success_url = reverse_lazy('department_reviews')
+
+    def form_valid(self, form):
+        messages.success(self.request, _('Review is deleted successfully'))
+        return super().form_valid(form)
+
+    def test_func(self) -> bool | None:
+        obj = self.get_object()
+        return obj.manager == self.request.user  

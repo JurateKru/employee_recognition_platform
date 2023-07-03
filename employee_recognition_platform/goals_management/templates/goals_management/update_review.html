@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block title %}Review{% endblock title %}
+{% block content %}
+<h1>Update review:</h1>
+<div class= "requests">
+    <h2>Employee: {{ review.employee }}</h2>
+<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+</div>
+{% endblock content %}

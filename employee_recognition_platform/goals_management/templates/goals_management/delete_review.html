@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} Delete review {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Confirm Review Deleting </h1>
+<br><b>Review:</b> {{ review.employee }}
+<br><b>Final score:</b> {{ review.get_total_review_display }}
+<form action="{{ request.path }}" method="post">
+    {% csrf_token %}
+    <h3>Delete?</h3>
+    <button class="button" type="submit">Yes</button>
+    <a class="button" href="{% url 'review_detail' review.pk %}">No</a>
+</form>
+{% endblock content %}

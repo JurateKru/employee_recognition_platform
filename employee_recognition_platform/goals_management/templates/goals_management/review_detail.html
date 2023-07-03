@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block title %}Review Details{% endblock title %}
+{% block content %}
+<div class= "requests">
+    <h1>Review details:</h1>
+    {% if review %}
+    <ul>  
+        <li>Employee: {{ review.employee }}
+                <br>
+                <br><i> Gaols achievment - </i> {{ review.goals_achievment }}
+                <br><i> Gaols review - </i> {{ review.get_goals_review_display }}
+                <br><i> Teamwork - </i> {{ review.teamwork }}
+                <br><i> Teamwork review - </i> {{ review.get_teamwork_review_display }}
+                <br><i> Innovation - </i> {{ review.innovation }}
+                <br><i> Innovation review - </i> {{ review.get_innovation_review_display }}
+                <br><i> Work ethics - </i> {{ review.work_ethics }}
+                <br><i> Work ethics review - </i> {{ review.get_work_ethics_review_display }}
+                <br><b> Total review - </b> {{ review.get_total_review_display }}
+                <br>
+                <br><i> Manager - </i> {{ review.manager }}
+        </li>
+    </ul>
+    {% else %}
+        <p>No reviews found</p>
+    {% endif %}
+    {% comment %} {% if  user == review.manager %} {% endcomment %}
+        <div class="parent-element">
+            <a class='button' href="{% url 'update_review' review.pk %}"><strong>Update Review<strong></a>
+            <a class='button' href="{% url 'delete_review' review.pk %}"><strong>Delete Review<strong></a>
+        </div> 
+    {% comment %} {% endif %} {% endcomment %}
+</div>
+{% endblock content %}
