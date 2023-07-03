@@ -9,12 +9,13 @@
     <script src="https://kit.fontawesome.com/a4117eb1fb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    {% if not user.is_staff %}
+    <div class="top-header">
+    {% if  not user.is_staff %}
         <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}">Home</a>
         <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
-        <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-        <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
     {% if user.is_authenticated %}
+    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+    <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
         <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
         <a class="button" href="{% url 'logout' %}">Logout</a>
     {% else %}
@@ -31,6 +32,7 @@
         <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
         <a class="button" href="{% url 'logout' %}">Logout</a>
     {% endif %}
+    </div>
     <main>
         {% if messages %}
             {% for message in messages %}
