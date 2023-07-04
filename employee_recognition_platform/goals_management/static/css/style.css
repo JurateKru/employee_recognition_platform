@@ -9,7 +9,7 @@ body {
 }
 
 .top-bar {
-  background-color: #94aca6;
+  background-color: rgb(200, 206, 217, 0.4);
   padding: 1rem;
   display: flex;
   justify-content: flex-end;
@@ -56,7 +56,7 @@ body {
 }
 
 .sidebar {
-  background-color: #94aca6;
+  background-color: rgb(200, 206, 217, 0.4);
   color: #fff;
   width: 200px;
   padding: 20px;
@@ -76,7 +76,7 @@ main {
 }
 
 footer {
-  background-color: #94aca6;
+  background-color: rgb(200, 206, 217, 0.4);
   padding: 0.1rem;
   text-align: center;
 }
