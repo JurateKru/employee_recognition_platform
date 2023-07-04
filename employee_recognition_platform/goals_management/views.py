@@ -15,6 +15,16 @@ from . models import Goal, Employee, Manager, Review
 def index(request):
     return render(request, 'goals_management/index.html')
 
+def search_view(request):
+    query = request.GET.get('q')
+    if query:
+        results = Goal.objects.filter(Q(title__icontains=query) | 
+                                      Q(status__icontains=query))
+    else:
+        results = Goal.objects.none()
+    return render(request, 'search_results.html', {'results': results, 'query': query})
+
+
 def ismart(request):
     return render(request, 'goals_management/ismart.html')
 

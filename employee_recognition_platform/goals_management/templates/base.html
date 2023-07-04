@@ -10,13 +10,19 @@
 </head>
 <body>
     <div class="top-bar">
-        <div class="login-buttons">
-            {% if not user.is_authenticated %}
+        <div class="login-buttons">            
+            {% if not user.is_authenticated %} 
                 <a class="button" href="{% url 'login' %}">Login</a>
                 <a class="button" href="{% url 'signup' %}">Sign up</a>
             {% else %}
-                <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
-                <a class="button" href="{% url 'logout' %}">Logout</a>
+                <div style="display: flex; align-items: center;">
+                    <form action="{% url 'search' %}" method="GET" class="search-form" style="margin-right: 10px;">
+                        <input type="text" name="query" placeholder="Search">
+                        <button type="submit">Search</button>
+                    </form>
+                    <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
+                    <a class="button" href="{% url 'logout' %}" style="margin-left: 10px;">Logout</a>
+                </div>            
             {% endif %}
         </div>
     </div>
