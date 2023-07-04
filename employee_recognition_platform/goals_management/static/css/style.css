@@ -1,11 +1,11 @@
 body {
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
-    background-color: #F5CAC3;
     color: black; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-image: url(img/banner.jpeg);
     grid-template-areas: repeat(auto-fill, minmax(100px, 1fr));
 }
 
@@ -20,13 +20,16 @@ body {
     margin-left: 15px;
     
   }
+* {
+    box-sizing: border-box;
+  }
 
 .top-header {
     background-color: #84a59d ;
     padding: 1rem;
     font-size: 20px;
     margin: 0rem;
-
+    
   }
   
 .top-header .button:hover,
@@ -47,3 +50,44 @@ footer{
     text-align: center;
 }
 /* color: #6D6875;  */
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-field-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-label {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.error-message {
+  color: red;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Tarpas tarp eilučių: 0 horizontaliai, 10px vertikaliai */
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  border-radius: 5px;
+}
+
+.rounded-cell {
+  border-radius: 8px;
+}
+

@@ -1,10 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Create Review{{ block.super }}{% endblock title %}
 {% block content %}
-<h1>Add a review:</h1>
+<h1>Fill the annual performance review:</h1>
 <form method="post" action="{{ request.path }}?employee_id={{ employee.id }}">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <table>
+        <tr>
+            <th>Goals Achievment:</th>
+            <td>{{ form.goals_achievment }}</td>
+            <th>Goals Review:</th>
+            <td>{{ form.goals_review }}</td>
+        </tr>
+        <tr>
+            <th>Teamwork:</th>
+            <td>{{ form.teamwork }}</td>
+            <th>Teamwork Review:</th>
+            <td>{{ form.teamwork_review }}</td>
+        </tr>
+        <tr>
+            <th>Innovation:</th>
+            <td>{{ form.innovation }}</td>
+            <th>Innovation Review:</th>
+            <td>{{ form.innovation_review }}</td>
+        </tr>
+        <tr>
+            <th>Work Ethics:</th>
+            <td>{{ form.work_ethics }}</td>
+            <th>Work Ethics Review:</th>
+            <td>{{ form.work_ethics_review }}</td>
+        </tr>
+        <tr>
+            <th>Total Review:</th>
+            <td colspan="3">{{ form.total_review }}</td>
+        </tr>
+    </table>
+
     <button type="submit">Confirm review</button>
 </form>
 {% endblock content %}
