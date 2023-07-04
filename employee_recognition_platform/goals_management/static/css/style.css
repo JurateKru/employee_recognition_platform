@@ -1,11 +1,11 @@
 body {
   font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
-  background-color: #f3d8d4;
   color: black;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: url(img/banner.jpeg);
 }
 
 .top-bar {
