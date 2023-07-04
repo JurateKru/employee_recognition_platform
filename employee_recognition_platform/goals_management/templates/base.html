@@ -9,40 +9,59 @@
     <script src="https://kit.fontawesome.com/a4117eb1fb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="top-header">
-    {% if  not user.is_staff %}
-        <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}">Home</a>
-        <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
-    {% if user.is_authenticated %}
-    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-    <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
-        <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
-        <a class="button" href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a class="button" href="{% url 'login' %}">Login</a>
-        <a class="button" href="{% url 'signup' %}">Sign up</a>
-    {% endif %}
-    {% endif %} 
-    {% if user.is_staff %}
-        <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}">Home</a>
-        <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
-        <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-        <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
-        <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
-        <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
-        <a class="button" href="{% url 'logout' %}">Logout</a>
-    {% endif %}
+    <div class="top-bar">
+        <div class="login-buttons">
+            {% if not user.is_authenticated %}
+                <a class="button" href="{% url 'login' %}">Login</a>
+                <a class="button" href="{% url 'signup' %}">Sign up</a>
+            {% else %}
+                <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
+                <a class="button" href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </div>
     </div>
-    <main>
-        {% if messages %}
-            {% for message in messages %}
-                <p class="box box-{{ message.tags }}">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-            {% block content %}
-            {% endblock content %}
-    </main> 
 
-    <footer><p>&copy; 2023 Goals Managment System</p></footer>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-buttons">
+                {% if  not user.is_staff %}
+                    <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}"><span>&#8962; </span>Home</a>
+                    <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
+                {% if user.is_authenticated %}
+                <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
+                    {% comment %} <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
+                    <a class="button" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="button" href="{% url 'login' %}">Login</a>
+                    <a class="button" href="{% url 'signup' %}">Sign up</a> {% endcomment %}
+                {% endif %}
+                {% endif %} 
+                {% if user.is_staff %}
+                    <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}"><span>&#8962; </span>Home</a>
+                    <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
+                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                    <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
+                    <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
+                    {% comment %} <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
+                    <a class="button" href="{% url 'logout' %}">Logout</a> {% endcomment %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="content">
+            <main>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="box box-{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                {% block content %}
+                {% endblock content %}
+            </main> 
+            <footer>
+                <p>&copy; 2023 Goals Managment System</p>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>
