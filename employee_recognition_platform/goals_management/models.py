@@ -162,9 +162,9 @@ class Goal(models.Model):
 
 class Review(models.Model):
     SCORE_CHOICES = (
-        (0, _('Nearly Meets Expectations')),
-        (8, _('Meets Expectations')),
-        (15, _('Exceeds Expectations')),
+        (0, _('\U0001F534 Nearly Meets Expectations')),
+        (8, _('\U0001F7E1 Meets Expectations')),
+        (15, _('\U0001F7E2 Exceeds Expectations')),
     )
     goals_achievment = HTMLField(_("goals achievment"), max_length=2000, db_index=True, blank=True, null=True)
     goals_review = models.PositiveSmallIntegerField(

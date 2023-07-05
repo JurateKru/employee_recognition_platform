@@ -84,7 +84,7 @@ body {
 }
 
 main {
-  margin: 2rem;
+  margin: 0rem;
   flex: 1;
 }
 
@@ -155,4 +155,12 @@ img.logo {
   margin: 0 0.5rem;
   border: 1px solid rgb(122, 116, 116);
   border-radius: 6px;
+}
+
+.confirm-button {
+  background-color: rgb(77, 199, 232);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
 }

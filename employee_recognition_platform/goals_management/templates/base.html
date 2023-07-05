@@ -12,7 +12,7 @@
     <div class="top-buttons">
         <div class="top-bar">
             <div class="left-section">
-                <img class="logo" src="{% static 'C:\CodeAcademy\employee_recognition_platform\employee_recognition_platform\goals_management\static\css\img\logo.PNG' %}">
+                <img class="logo" src="{% static 'css/img/logo.PNG' %}">
                 <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}"><span>&#8962; </span>Home</a>
                 <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
             </div>
