@@ -1,10 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Create Goal{{ block.super }}{% endblock title %}
 {% block content %}
-<h1>Add a new goal:</h1>
+<h1>Create a new goal:</h1>
 <form method="post" action="{{ request.path }}?goal_id={{ goal.id }}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Confirm your goal</button>
+<table>
+    <tr>
+        <td><b>Title:</b></td>
+    </tr>
+    <tr>
+        <td>{{form.title}}</td>
+
+    </tr>
+    <tr>
+        <td><b>Decription:</b></td>
+    </tr>
+    <tr>
+        <td>{{ form.description }}</td>
+        <td colspan="3" class="table-cell-align-right">
+            <b>Priority:</b> {{ form.priority }} <br><br>
+            <b>Status:</b> {{ form.status }} <br><br>
+            <b>Progress:</b> {{ form.progress }}
+        </td>
+    </tr>
+    <tr>
+        <td><b>Start date:</b></td>
+    </tr>
+    <tr>
+        <td>{{form.start_date}}</td>
+    </tr>
+    <tr>
+        <td><b>End date:</b></td>
+    </tr>
+    <tr>
+        <td>{{form.end_date}}</td>
+    </tr>
+</table>
+    <button class="confirm-button" type="submit"><b>Confirm your goal</b></button>
 </form>
 {% endblock content %}

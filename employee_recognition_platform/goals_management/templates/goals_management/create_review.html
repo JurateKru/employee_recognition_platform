@@ -11,31 +11,40 @@
     <p>Select employee: {{ form.employee }}</p>
     <table>
         <tr>
-            <th>&#x1F3C6; Goals Achievment:</th>
+            <td>&#x1F3C6;<b> Goals Achievment:</b></td>
+        </tr>
+        <tr>
             <td>{{ form.goals_achievment }}</td>
             <th>Goals Review:</th>
             <td>{{ form.goals_review }}</td>
         </tr>
         <tr>
-            <th>&#x1F91D; Teamwork:</th>
+            <td>&#x1F91D;<b> Teamwork:</b></td>
+        </tr>
+        <tr>
             <td>{{ form.teamwork }}</td>
-            <th>Teamwork Review:</th>
+            <th>Teamwork Review:</th><br>
             <td>{{ form.teamwork_review }}</td>
         </tr>
         <tr>
-            <th>&#x1F4A1; Innovation:</th>
+            <td>&#x1F4A1;<b> Innovation:</b></td>
+        </tr>
+        <tr>
             <td>{{ form.innovation }}</td>
             <th>Innovation Review:</th>
             <td>{{ form.innovation_review }}</td>
         </tr>
         <tr>
-            <th>&#x1F4BC; Work Ethics:</th>
+            <td>&#x1F4BC;<b> Work Ethics:</b></td>
+        </tr>
+        <tr>
             <td>{{ form.work_ethics }}</td>
             <th>Work Ethics Review:</th>
             <td>{{ form.work_ethics_review }}</td>
         </tr>
+        
         <tr>
-            <th colspan=3 class="big"> Total Review:</th>
+            <th colspan=2 class="big"> Total Review:</th>
             <td>{{ form.total_review }}</td>
         </tr>
     </table>
