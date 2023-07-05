@@ -33,7 +33,7 @@ body {
   margin-right: 10px;
   border: 1px solid rgb(122, 116, 116);
   border-radius: 11px;
-  background-color: #f3d8d4;
+  background-color: whitesmoke;
   padding: 0.5rem;
 }
 
@@ -41,7 +41,7 @@ body {
   margin-right: 10px;
   border: 1px solid rgb(122, 116, 116);
   border-radius: 11px;
-  background-color: whitesmoke;
+  background-color: #d4f3f2;
   padding: 0.5rem;
 }
 
@@ -58,7 +58,7 @@ body {
 .sidebar-buttons .button {
   border: 1px solid rgb(122, 116, 116);
   border-radius: 11px;
-  background-color: #f3d8d4;
+  background-color: #d4f3f2;
   padding: 0.4rem;
   display: block;
   margin-right: 10px;
@@ -164,3 +164,9 @@ img.logo {
   border-radius: 5px;
   text-align: center;
 }
+img.picture {
+  max-width: 11vw;
+  /* border-radius: 1.5rem; */
+  margin-bottom: 10px;
+  border-radius: 50% / 100% 200%;
+} 
