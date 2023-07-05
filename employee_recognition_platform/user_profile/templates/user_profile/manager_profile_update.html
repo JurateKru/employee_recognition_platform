@@ -4,8 +4,7 @@
 <h3>Upload new profile picture</h3>
 <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+    {{ manager_profile_form.as_p }}
     <button class="button" type="submit">Upload</button>
 </form>
 {% endblock content %}

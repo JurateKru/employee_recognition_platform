@@ -7,11 +7,10 @@ User = get_user_model()
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username", "email")
+        fields = ()
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -20,7 +19,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ("picture",)
 
 
-class ProfileUpdateForm(forms.ModelForm):
+class ManagerProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = models.ManagerProfile
         fields = ("picture",)
