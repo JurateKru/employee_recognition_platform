@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}
+<link rel='stylesheet' href="{% static 'css/style.css' %}">
+{% endblock stylesheet %}
 {% block title %}Create Review{{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Fill the annual performance review:</h1>
@@ -31,11 +35,15 @@
             <td>{{ form.work_ethics_review }}</td>
         </tr>
         <tr>
-            <th>Total Review:</th>
-            <td colspan="3">{{ form.total_review }}</td>
+            <th colspan=3 class="big">Total Review:</th>
+            <td>{{ form.total_review }}</td>
         </tr>
     </table>
 
     <button type="submit">Confirm review</button>
 </form>
+
+
 {% endblock content %}
+
+

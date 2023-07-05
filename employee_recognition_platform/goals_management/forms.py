@@ -32,5 +32,5 @@ class ReviewCreateForm(forms.ModelForm):
 class ReviewUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Review
-        fields =('goals_achievment', 'goals_review', 'teamwork', 'teamwork_review', 'innovation', 'innovation_review', 'work_ethics', 'work_ethics_review', 'total_review')
+        fields = ('goals_achievment', 'goals_review', 'teamwork', 'teamwork_review', 'innovation', 'innovation_review', 'work_ethics', 'work_ethics_review', 'total_review')
 
