@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}{{ user_ }} profile in {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>{{ user_ }}</h1>
-{% if user_.profile and user_.profile.picture %}
-<img class="user-profile-picture" src="{{ user_.profile.picture.url }}">
-{% endif %}
-{% if user_.first_name or user_.last_name %}
-    <p>{{ user_.first_name }} {{ user_.last_name }}</p>
-{% endif %}
-{% if user_ == request.user %}
+{% if user_ == request.user and not user.is_staff %}
+    <h2>{{ user_.first_name }} {{ user_.last_name }}</h2>
+    <h4>Position: {{ user_.employee.position }}</h4>
     <p>E-mail: {{ user_.email }}</p>
-    <p><a href="{% url 'profile_update' %}">Update Profile</a></p>
+    <p>Hire date: {{ user_.employee.hire_date }}</p>
+    <p><a href="{% url 'profile_update' %}">Upload picture</a></p>
+{% endif %}
+{% if user_ == request.user and user.is_staff %}
+    <h2>{{ user_.manager.first_name }} {{ user_.manager.last_name }}</h2>
+    <h4><i>Position:</i> Manager
+    <br><i>Department:</i> {{ user_.manager.department }}</h4>
+    <p><i>E-mail:</i> {{ user_.manager.email }}
+    <br><i>Hire date:</i> {{ user_.manager.hire_date }}</p>
+    <p><a href="{% url 'profile_update' %}">Upload picture</a></p>
 {% endif %}
 {% endblock content %}

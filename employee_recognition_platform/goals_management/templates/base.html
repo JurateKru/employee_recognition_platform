@@ -12,7 +12,7 @@
     <div class="top-buttons">
         <div class="top-bar">
             <div class="left-section">
-                <img class="logo" src="{% static 'C:\CodeAcademy\employee_recognition_platform\employee_recognition_platform\goals_management\static\css\img\logo.PNG' %}">
+                <img class="logo" src="{% static 'css\img\logo.PNG' %}">
                 <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}"><span>&#8962; </span>Home</a>
                 <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
             </div>
@@ -38,15 +38,19 @@
         <div class="sidebar">
             <div class="sidebar-buttons">
                 {% if user.is_authenticated and not user.is_staff %}
-                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-                    <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
+                  <img class="picture" src="{{ user.profile.picture.url }}">
+                  <a {% if request.resolver_match.url_name == 'profile' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
+                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                  <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
                 {% endif %} 
                 {% if user.is_staff %}
-                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-                    <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
-                    <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
+                  <img class="picture" src="{{ user.manager_user_profile.picture.url }}">
+                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
+                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                  <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
+                  <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
                 {% endif %}
-            </div>
+              </div>
         </div>
         <div class="content">
             <main>
