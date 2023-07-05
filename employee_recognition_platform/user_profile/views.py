@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.utils.timezone import now
-from . forms import ProfileUpdateForm, UserUpdateForm
+from . forms import ProfileUpdateForm, UserUpdateForm, ManagerProfileUpdateForm
 from . models import Profile
 from goals_management.models import Employee
 
@@ -29,7 +29,7 @@ def profile_update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, "Profile updated.")
+            messages.success(request, "Profile picture changed.")
             return redirect('profile')
     else:
         user_form = UserUpdateForm(instance=request.user)
@@ -79,3 +79,20 @@ def signup(request):
             messages.success(request, "User registration successful!")
             return redirect('login')
     return render(request, 'user_profile/signup.html')
+
+
+@login_required
+@csrf_protect
+def manager_profile_update(request):
+    if request.method == "POST":
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ManagerProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Profile picture changed.")
+            return redirect('profile')
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ManagerProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'user_profile/profile_update.html', {'user_form': user_form, 'profile_form': profile_form})

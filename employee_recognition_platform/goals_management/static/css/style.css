@@ -181,3 +181,10 @@ img.picture {
 td + td {
   padding-left: 10px;
 }
+.button {
+  border: 1px solid rgb(122, 116, 116);
+  border-radius: 7px;
+  background-color: #dee6e5;
+  padding: 0.3rem;
+  text-decoration: none;
+}

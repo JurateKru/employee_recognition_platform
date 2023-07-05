@@ -3,10 +3,10 @@
 {% block content %}
 {% if user_ == request.user and not user.is_staff %}
     <h2>{{ user_.first_name }} {{ user_.last_name }}</h2>
-    <h4>Position: {{ user_.employee.position }}</h4>
-    <p>E-mail: {{ user_.email }}</p>
-    <p>Hire date: {{ user_.employee.hire_date }}</p>
-    <p><a href="{% url 'profile_update' %}">Upload picture</a></p>
+    <h4><i>Position:</i> {{ user_.employee.position }}</h4>
+    <p><i>E-mail:</i> {{ user_.email }}</p>
+    <p><i>Hire date:</i> {{ user_.employee.hire_date }}</p>
+    <a class="button" href="{% url 'profile_update' %}">Upload picture</a>
 {% endif %}
 {% if user_ == request.user and user.is_staff %}
     <h2>{{ user_.manager.first_name }} {{ user_.manager.last_name }}</h2>
@@ -14,6 +14,6 @@
     <br><i>Department:</i> {{ user_.manager.department }}</h4>
     <p><i>E-mail:</i> {{ user_.manager.email }}
     <br><i>Hire date:</i> {{ user_.manager.hire_date }}</p>
-    <p><a href="{% url 'profile_update' %}">Upload picture</a></p>
+    <a class="button" href="{% url 'profile_update' %}">Upload picture</a>
 {% endif %}
 {% endblock content %}
