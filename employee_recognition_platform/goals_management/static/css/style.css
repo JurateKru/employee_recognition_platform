@@ -154,7 +154,7 @@ table tr th td {
   font-size: x-large;
 }
 img.logo {
-  max-width: 10vw;
+  max-width: 12vw;
   margin: 0 0.5rem;
   border: 1px solid rgb(122, 116, 116);
   border-radius: 6px;
@@ -245,4 +245,28 @@ td + td {
 
 .detail-value {
   color: #666;
+}
+
+.box {
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid #999999;
+  border-radius: 0.5rem;
+  display: inline-block;
+  width: fit-content;
+}
+.box-info {
+  background-color: #cbddec;
+}
+.box-warning {
+  background-color: #f4caa0;
+}
+.box-error {
+  background-color: #f9a7a7;
+}
+.box-success {
+  background-color: #cdf6c3;
+}
+.box-debug {
+  background-color: #eeeeee;
 }

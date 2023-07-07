@@ -7,7 +7,13 @@
     {% if employee %}
     <div class="profile-header">
         <h1>Employee #{{ employee.id }} {{ employee.first_name}} {{ employee.last_name}}</h1>
-        <br><img class="picture" src="{{ employee.user.profile.picture.url }}"><br>
+        <br>
+        {% if employee.user.profile.picture %}
+            <img class="picture" src="{{ employee.user.profile.picture.url }}">
+        {% else %}
+            <img class="picture" src="{% static 'css\img\default.jpg' %}">
+        {% endif %}
+        <br>
         <div class="detail-row">
             <span class="detail-label"><i class="far fa-envelope"></i></span>
             <span class="detail-value">{{ employee.email }}</span>
