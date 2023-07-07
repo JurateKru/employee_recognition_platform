@@ -26,7 +26,7 @@
                     <div style="display: flex; align-items: center;">
                         <form action="{% url 'search' %}" method="GET" class="search-form" style="margin-right: 10px;">
                             <input type="text" name="query" placeholder="Search">
-                            <button type="submit">Search</button>
+                            <button class="button" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                         <a class="button" href="/admin"><i class="fa-solid fa-user-tie"></i> {{ user.username }}</a>
                         <a class="button" href="{% url 'logout' %}" style="margin-left: 10px;">Logout</a>
@@ -40,17 +40,25 @@
         <div class="sidebar">
             <div class="sidebar-buttons">
                 {% if user.is_authenticated and not user.is_staff %}
-                  <img class="picture" src="{{ user.profile.picture.url }}">
-                  <a {% if request.resolver_match.url_name == 'profile' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
-                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-                  <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
+                    {% if user.profile.picture %}
+                        <img class="picture" src="{{ user.profile.picture.url }}">
+                    {% else %}
+                        <img class="picture" src="{% static 'css\img\default.jpg' %}">
+                    {% endif %}
+                    <a {% if request.resolver_match.url_name == 'profile' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
+                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                    <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
                 {% endif %} 
                 {% if user.is_staff %}
-                  <img class="picture" src="{{ user.manager_user_profile.picture.url }}">
-                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
-                  <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
-                  <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
-                  <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
+                    {% if user.manager_user_profile.picture %}
+                        <img class="picture" src="{{ user.manager_user_profile.picture.url }}">
+                    {% else %}
+                        <img class="picture" src="{% static 'css\img\default.jpg' %}">
+                    {% endif %}
+                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
+                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">Goals</a>
+                    <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
+                    <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
                 {% endif %}
               </div>
         </div>
@@ -64,7 +72,6 @@
                 {% block content %}
                 {% endblock content %}
             </main> 
-            
         </div>
     </div>
     <footer>
