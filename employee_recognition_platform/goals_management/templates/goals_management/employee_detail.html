@@ -4,24 +4,44 @@
 {% block title %}Employee Details{% endblock title %}
 {% block content %}
 <div class= "requests">
-    <h1>Employee details:</h1>
     {% if employee %}
-    <ul>  
-        <li>#{{ employee.id }}. {{ employee.first_name}} {{ employee.last_name}}
-            <br><i> Email address - </i> {{ employee.email }}
-            <br><i> Position - </i> {{ employee.position }}
-            <br><i> Manager - </i> {{ employee.manager }}
-            <br><i> Hire date - </i> {{ employee.hire_date }}
-            <br><i> Status - </i> {{ employee.get_status_display }}
-            {% comment %} <br><img class="user-profile-picture" src="{{ user_.profile.picture.url }}"> {% endcomment %}
-        </li>
-    </ul>
+    <div class="profile-header">
+        <h1>Employee #{{ employee.id }} {{ employee.first_name}} {{ employee.last_name}}</h1>
+        <br><img class="picture" src="{{ employee.user.profile.picture.url }}"><br>
+        <div class="detail-row">
+            <span class="detail-label"><i class="far fa-envelope"></i></span>
+            <span class="detail-value">{{ employee.email }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label"><i class="fas fa-briefcase"></i></span>
+            <span class="detail-value">{{ employee.position }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label"><i class="fas fa-users"></i></span>
+            <span class="detail-value">Manager: {{ employee.manager }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label"><i class="far fa-calendar-alt"></i></span>
+            <span class="detail-value">Hire date: {{ employee.hire_date }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">
+                {% if employee.status == 0 %}
+                    <i class="fas fa-check-circle"></i>
+                {% else %}
+                    <i class="fas fa-times-circle"></i>
+                {% endif %}
+            </span>
+            <span class="detail-value">Status: {{ employee.get_status_display }}</span>
+        </div>
+        <br>
+    </div>
     {% else %}
         <p>No employees found</p>
     {% endif %}
         <div class="parent-element">
-            <a class='button' href="{% url 'employee_goals_list' employee.pk %}"><strong>Review Goals<strong></a>
-            <a class='button' href="{% url 'create_review' employee.pk %}"><strong>Create Review<strong></a>
+            <a class='button' href="{% url 'employee_goals_list' employee.pk %}">Review Goals</a>
+            <a class='button' href="{% url 'create_review' employee.pk %}">Create Review</a>
         </div>
 </div>
 {% endblock content %}
