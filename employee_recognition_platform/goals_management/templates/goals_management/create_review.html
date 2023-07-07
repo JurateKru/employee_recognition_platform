@@ -12,40 +12,31 @@
     <table>
         <tr>
             <td>&#x1F3C6;<b> Goals Achievment:</b></td>
-        </tr>
-        <tr>
-            <td>{{ form.goals_achievment }}</td>
-            <th>Goals Review:</th>
-            <td>{{ form.goals_review }}</td>
-        </tr>
-        <tr>
             <td>&#x1F91D;<b> Teamwork:</b></td>
         </tr>
         <tr>
-            <td>{{ form.teamwork }}</td>
-            <th>Teamwork Review:</th><br>
-            <td>{{ form.teamwork_review }}</td>
+            <td>{{ form.goals_achievment }}</td>
+            <td>{{ form.teamwork }}</td>                              
+        </tr>
+        <tr>
+            <td class="padding-buttom"><b>Goals Review:</b><br><br> {{ form.goals_review }}</td>
+            <td class="padding-buttom"><b>Teamwork Review:</b><br><br> {{ form.teamwork_review }}</td>
         </tr>
         <tr>
             <td>&#x1F4A1;<b> Innovation:</b></td>
-        </tr>
-        <tr>
-            <td>{{ form.innovation }}</td>
-            <th>Innovation Review:</th>
-            <td>{{ form.innovation_review }}</td>
-        </tr>
-        <tr>
             <td>&#x1F4BC;<b> Work Ethics:</b></td>
         </tr>
         <tr>
+            <td>{{ form.innovation }}</td>
             <td>{{ form.work_ethics }}</td>
-            <th>Work Ethics Review:</th>
-            <td>{{ form.work_ethics_review }}</td>
         </tr>
-        
         <tr>
-            <th colspan=2 class="big"> Total Review:</th>
-            <td>{{ form.total_review }}</td>
+            <td class="padding-buttom"><b>Innovation Review: </b><br><br> {{ form.innovation_review }}</td>
+            <td class="padding-buttom"><b>Work Ethics Review: </b><br><br> {{ form.work_ethics_review }}</td>
+        </tr>      
+        <tr>
+
+            <td class="big"><b>Total Review:<b>{{ form.total_review }}</td>
         </tr>
     </table>
 

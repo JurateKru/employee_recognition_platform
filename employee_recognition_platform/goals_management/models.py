@@ -105,9 +105,9 @@ class Goal(models.Model):
         )
 
     PRIORITY_CHOICES = (
-        (0, _('High')),
-        (1, _('Medium')),
-        (2, _('Low')),
+        (0, _('\U0001f680 High')),
+        (1, _('\U00002696 Medium')),
+        (2, _('\U0001F422 Low')),
     )
     priority = models.PositiveSmallIntegerField(
         _("priority"), 
@@ -116,11 +116,11 @@ class Goal(models.Model):
         db_index=True
     )
     GOAL_STATUS = (
-        (0, _('Planned')),
-        (1, _('In progress')),
-        (2, _('Complete')),
-        (3, _('On hold')),
-        (4, _('Cancelled')),
+        (0, _('📅 Planned')),
+        (1, _('⏳ In progress')),
+        (2, _('✅ Complete')),
+        (3, _('⏸️ On hold')),
+        (4, _('❌ Cancelled')),
     )
     status = models.PositiveSmallIntegerField(
         _("status"), 
@@ -129,17 +129,17 @@ class Goal(models.Model):
         db_index=True
     )
     PROGRESS_CHOICES = (
-        (0, _('0 %')),
-        (1, _('10 %')),
-        (2, _('20 %')),
-        (3, _('30 %')),
-        (4, _('40 %')),
-        (5, _('50 %')),
-        (6, _('60 %')),
-        (7, _('70 %')),
-        (8, _('80 %')),
-        (9, _('90 %')),
-        (10, _('100 %')),
+        (0, _('🟣 0 %')),
+        (1, _('🟣 10 %')),
+        (2, _('🟠 20 %')),
+        (3, _('🟠 30 %')),
+        (4, _('🟠 40 %')),
+        (5, _('🟡 50 %')),
+        (6, _('🟡 60 %')),
+        (7, _('🟡 70 %')),
+        (8, _('🟢 80 %')),
+        (9, _('🟢 90 %')),
+        (10, _('🟢 100 %')),
     )
     progress = models.PositiveSmallIntegerField(
         _("progress"), 

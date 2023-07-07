@@ -6,8 +6,41 @@
 <div class= "requests">
 <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
+    <h1>Update this goal:</h2>
+    <table>
+        <tr>
+            <td><b>Title:</b></td>
+        </tr>
+        <tr>
+            <td>{{form.title}}</td>
+    
+        </tr>
+        <tr>
+            <td><b>Decription:</b></td>
+        </tr>
+        <tr>
+            <td>{{ form.description }}</td>
+            <td colspan="3" class="table-cell-align-left">
+                <b>Priority:</b> {{ form.priority }} <br><br>
+                <b>Status:</b> {{ form.status }} <br><br>
+                <b>Progress:</b> {{ form.progress }}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Start date:</b></td>
+        </tr>
+        <tr>
+            <td>{{form.start_date}}</td>
+        </tr>
+        <tr>
+            <td><b>End date:</b></td>
+        </tr>
+        <tr>
+            <td>{{form.end_date}}</td>
+        </tr>
+    
+    </table>
+    <button class="goal-button" type="submit">Update</button>
 </form>
 </div>
 {% endblock content %}

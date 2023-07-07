@@ -146,7 +146,8 @@ textarea, select {
 
 table tr th td {
   padding: 5px;
-  text-align: right;
+  text-align: justify;
+
 }
 
 .big {
@@ -165,6 +166,8 @@ img.logo {
   padding: 10px 20px;
   border-radius: 5px;
   text-align: center;
+  margin-left: 55rem;
+  
 }
 img.picture {
   max-width: 11vw;
@@ -173,13 +176,15 @@ img.picture {
   border-radius: 50% / 100% 200%;
 } 
 
-.table-cell-align-right {
-  text-align: right;
+.table-cell-align-left {
+  text-align: left;
   margin-left: 5px;
+  padding-left: 40px;
+  
 }
 
 td + td {
-  padding-left: 10px;
+  padding-left: 120px;
 }
 .button {
   border: 1px solid rgb(122, 116, 116);
@@ -187,4 +192,22 @@ td + td {
   background-color: #dee6e5;
   padding: 0.3rem;
   text-decoration: none;
+}
+
+.custom-padding {
+  padding-left: 50px;
+}
+
+.padding-buttom {
+  padding-bottom: 35px;
+}
+
+.goal-button {
+  background-color: rgb(77, 199, 232);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 2rem;
+  margin-left: 10rem;
 }

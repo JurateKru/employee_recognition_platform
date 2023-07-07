@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td>{{ form.description }}</td>
-        <td colspan="3" class="table-cell-align-right">
+        <td colspan="3" class="table-cell-align-left">
             <b>Priority:</b> {{ form.priority }} <br><br>
             <b>Status:</b> {{ form.status }} <br><br>
             <b>Progress:</b> {{ form.progress }}
@@ -35,7 +35,8 @@
     <tr>
         <td>{{form.end_date}}</td>
     </tr>
+
 </table>
-    <button class="confirm-button" type="submit"><b>Confirm your goal</b></button>
+    <button class="goal-button" type="submit"><b>Confirm your goal</b></button>
 </form>
 {% endblock content %}

@@ -21,6 +21,10 @@ class GoalUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Goal
         fields =('title', 'description', 'start_date', 'end_date', 'priority', 'status', 'progress')
+        widgets = {
+            'start_date': DateInput(),
+            'end_date': DateInput(),            
+        }
 
 
 class ReviewCreateForm(forms.ModelForm):

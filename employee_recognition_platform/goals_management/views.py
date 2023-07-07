@@ -55,7 +55,7 @@ class GoalCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.owner = self.request.user
         messages.success(self.request, _('Goal is created successfully!'))
         return super().form_valid(form)
-    
+     
 
 class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Goal
@@ -223,3 +223,4 @@ class ReviewListView(generic.ListView):
         qs = super().get_queryset()
         user = self.request.user
         return qs.filter(employee__user=user)
+    
