@@ -24,11 +24,6 @@ class Profile(models.Model):
         editable=False,
         null=True, blank=True,
     )
-    # @property
-    # def manager(self):
-    #     if self.employee:
-    #         return self.employee.manager
-    #     return None
 
     class Meta:
         verbose_name = _("profile")
@@ -66,12 +61,6 @@ class ManagerProfile(models.Model):
         related_name='manager_profile',
         null=True, blank=True,
     )
-    # @property
-    # def employees(self):
-    #     if self.manager:
-    #         employees = Employee.objects.filter(manager=self.manager).all()
-    #         return employees
-    #     return None
 
     class Meta:
         verbose_name = _("manager profile")
