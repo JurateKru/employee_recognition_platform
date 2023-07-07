@@ -213,10 +213,10 @@ td + td {
   margin-left: 10rem;
 }
 
-.profile-header h2 {
+.profile-header h1 {
   color: rgb(82, 65, 80);
   margin-bottom: 0;
-  margin-top: 2em;
+  margin-top: 2rem;
 }
 
 .profile-header h4 {
