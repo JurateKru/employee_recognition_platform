@@ -3,17 +3,17 @@
 {% block content %}
 {% if user_ == request.user and not user.is_staff %}
     <h2>{{ user_.first_name }} {{ user_.last_name }}</h2>
-    <h4><i>Position:</i> {{ user_.employee.position }}</h4>
-    <p><i>E-mail:</i> {{ user_.email }}</p>
-    <p><i>Hire date:</i> {{ user_.employee.hire_date }}</p>
+    <h4>Position: <i>{{ user_.employee.position }}</i></h4>
+    <p>E-mail: <i>{{ user_.email }}</i></p>
+    <p>Hire date: <i>{{ user_.employee.hire_date }}</i></p>
     <a class="button" href="{% url 'profile_update' %}">Upload picture</a>
 {% endif %}
 {% if user_ == request.user and user.is_staff %}
     <h2>{{ user_.manager.first_name }} {{ user_.manager.last_name }}</h2>
-    <h4><i>Position:</i> Manager
-    <br><i>Department:</i> {{ user_.manager.department }}</h4>
-    <p><i>E-mail:</i> {{ user_.manager.email }}
-    <br><i>Hire date:</i> {{ user_.manager.hire_date }}</p>
-    <a class="button" href="{% url 'profile_update' %}">Upload picture</a>
+    <h4>Position: <i>Manager</i>
+    <br>Department: <i>{{ user_.manager.department }}</i></h4>
+    <p>E-mail: <i>{{ user_.manager.email }}</i></p>
+    <p>Hire date: <i>{{ user_.manager.hire_date }}</i></p>
+    <a class="button" href="{% url 'manager_profile' %}">Upload picture</a>
 {% endif %}
 {% endblock content %}
