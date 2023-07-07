@@ -86,7 +86,7 @@ def signup(request):
 def manager_profile_update(request):
     if request.method == "POST":
         user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ManagerProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ManagerProfileUpdateForm(request.POST, request.FILES, instance=request.user.manager_user_profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -94,5 +94,5 @@ def manager_profile_update(request):
             return redirect('profile')
     else:
         user_form = UserUpdateForm(instance=request.user)
-        profile_form = ManagerProfileUpdateForm(instance=request.user.profile)
-    return render(request, 'user_profile/profile_update.html', {'user_form': user_form, 'profile_form': profile_form})
+        profile_form = ManagerProfileUpdateForm(instance=request.user.manager_user_profile)
+    return render(request, 'user_profile/manager_profile_update.html', {'user_form': user_form, 'manager_profile_form': profile_form})
