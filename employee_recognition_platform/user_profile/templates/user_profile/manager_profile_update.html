@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Update {{ block.super }} Profile{% endblock title %}
 {% block content %}
-<h3>Upload a new profile picture</h3>
-<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ manager_profile_form.as_p }}
-    <button class="button" type="submit">Upload</button>
-</form>
+<div class="profile">
+    <div class="profile-header">
+        <h2 class="profile-title">Upload a new profile picture</h2>
+        <form class="profile-form" method="post" action="{{ request.path }}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ manager_profile_form.as_p }}
+            <button class="button" type="submit">Upload</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}
