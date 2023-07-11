@@ -28,7 +28,14 @@
                     <br><i> Start date - </i> {{ goal.start_date }}
                     <br><i> End date - </i> {{ goal.end_date }}
                     <br><i> Priority - </i> {{ goal.get_priority_display }}
-                    <br><i> Progress - </i> {{ goal.get_progress_display }}
+                    <br><i> Progress - </i> 
+                    <div class="progress-bar">
+                        <div class="progress-bar-all"></div>
+                        <div class="progress-bar-goal" style="width: {{ goal.progress }}%;"></div>
+                        <div class="start-text">Start 0%</div>
+                        <div class="end-text">Goal 100%</div>
+                        <div class="current-text">Current {{ goal.progress }}%</div>
+                      </div>
             </li>
 
         {% endfor %} 
