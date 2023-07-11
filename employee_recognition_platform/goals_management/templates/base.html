@@ -16,7 +16,7 @@
             <div class="left-section">
                 <img class="logo" src="{% static 'css\img\logo.PNG' %}">
                 <a {% if request.resolver_match.url_name == 'index' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'index' %}"><span>&#8962; </span>Home</a>
-                <a {% if request.resolver_match.url_name == 'ismart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'ismart' %}">ISMART Methodology</a>
+                <a {% if request.resolver_match.url_name == 'smart' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'smart' %}">SMART Method</a>
             </div>
             <div class="right-section">                            
                 {% if not user.is_authenticated %} 

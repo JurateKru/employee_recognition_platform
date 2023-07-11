@@ -270,3 +270,85 @@ td + td {
 .box-debug {
   background-color: #eeeeee;
 }
+.centered-body {
+  display: flex;
+  justify-content: left;
+  
+}
+.centered-section {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  margin-left: 18rem;
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 7rem);
+  grid-gap: 10px;
+  background-color: #2b028a;
+  padding: 5rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.grid-item {
+  padding: 10px;
+}
+.smart-cell {
+  color: white; /* Teksto spalva (pvz. raudona) */
+  background-color: #34cdbbb9; /* Fono spalva (pvz. šviesiai raudona) */
+  font-size: 50px; /* Teksto dydis (pvz. 16 pikseliai) */
+  font-family: Arial, sans-serif; /* Teksto šriftas (pvz. Arial, be serifo) */
+  border-width: 5px solid white; /* Langelio borderio storis (pvz. 2 pikseliai) */
+  border-radius: 5px; /* Langelio kampų užapvalinimas (pvz. 5 pikseliai) */
+  text-align: center; /* Teksto lygiavimas horizontaliai per vidurį */
+  display: flex; /* Naudojama vertikaliam teksto lygiavimui */
+  justify-content: center; /* Teksto lygiavimas horizontaliai per vidurį */
+  align-items: center; /* Teksto lygiavimas vertikaliai per vidurį */
+}
+
+.smart-concept{
+  color: white;
+  background-color: inherit;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goal-components{
+  color: rgb(149, 142, 142); 
+  background-color: white;
+  font-size: 15px;
+  font-family: Arial,sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  margin-bottom: 0;
+}
+.goal-letters{
+  color: #34cdbbb9;
+  background-color: white;
+  font-size: 50px;
+  font-family: Arial, sans-serif; 
+  border-width: 5px solid white; 
+  border-radius: 5px; 
+  text-align: center; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.section-title {
+  margin-top: 15rem;
+  margin-bottom: 0;
+  text-align: center;
+  grid-column: 1 / -1;
+}

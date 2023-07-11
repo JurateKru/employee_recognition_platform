@@ -25,8 +25,18 @@ def search_view(request):
     return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
-def ismart(request):
-    return render(request, 'goals_management/ismart.html')
+def smart(request):
+    grid_data = [
+        ['S', 'M', 'A', 'R', 'T'],
+        ['Specific', 'Measurable', 'Attainable', 'Relevant', 'Time-bound'],
+        ['Define your goal in detail. Be as specific as possible',
+         'Decide how you wil measure success',
+         'Set realistic goals that challenge you, but are achievable',
+         'Ensure your goal is results-oriented',
+         'Set a clear deadline and monitos your progress'],
+        ['G', 'O', 'A', 'L', 'S'],
+    ]
+    return render(request, 'goals_management/smart.html', {'grid_data': grid_data})
 
 
 class GoalListView(generic.ListView):
