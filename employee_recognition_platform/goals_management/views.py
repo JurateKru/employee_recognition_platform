@@ -254,6 +254,7 @@ class GoalJournalDetailView(generic.edit.FormMixin, generic.DetailView):
         if form.is_valid():
             return self.form_valid(form)
         else:
+            print('nepavyko')
             return self.form_invalid(form)
         
     def form_valid(self, form: Any) -> HttpResponse:
