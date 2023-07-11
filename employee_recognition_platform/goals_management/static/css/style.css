@@ -125,6 +125,7 @@ footer {
 table {
   border-collapse: separate;
   border-spacing: 0 10px; /* Tarpas tarp eilučių: 0 horizontaliai, 10px vertikaliai */
+  margin-bottom: 50px;
 }
 
 input[type="text"],
@@ -169,6 +170,18 @@ img.logo {
   margin-left: 55rem;
   
 }
+
+.goal-detail-button {
+  border: 1px solid rgb(122, 116, 116);
+  border-radius: 7px;
+  background-color: #dee6e5;
+  padding: 0.3rem;
+  text-decoration: none;
+  color: black;
+  margin-top: 20px;
+}
+
+
 img.picture {
   max-width: 11vw;
   /* border-radius: 1.5rem; */
@@ -180,7 +193,6 @@ img.picture {
   text-align: left;
   margin-left: 5px;
   padding-left: 40px;
-  
 }
 
 td + td {
@@ -352,3 +364,75 @@ td + td {
   text-align: center;
   grid-column: 1 / -1;
 }
+
+.title-description {
+  background-color: white;
+  padding: 0;
+  border-radius: 5px;
+  width: 60%; 
+  font-weight: bold;
+  border: 1px solid black;
+  text-align: center;
+} 
+
+.content-description {
+  background-color: white;
+  padding: 8px;
+  padding-bottom: 40px;
+  border-radius: 5px;
+  width: 60%; 
+  height: 40%;
+  border: 1px solid black;
+  }
+
+.progress-bar {
+  height: 20px;
+  background-color: lightgray;
+  position: relative;
+  border-radius: 0.5rem;
+  margin-bottom: 40px;
+}
+
+.progress-bar-all {
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 0.5rem;
+}
+
+.progress-bar-goal {
+  height: 100%;
+  background-color: blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.5rem;
+}
+
+.start-text,
+.end-text,
+.current-text {
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px;
+  color: black;
+}
+
+.start-text {
+  left: 0;
+}
+
+.end-text {
+  right: 0;
+}
+
+.current-text {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.journal-section{
+  margin-top: 60px;
+}
+
+
+

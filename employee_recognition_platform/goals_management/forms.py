@@ -38,3 +38,13 @@ class ReviewUpdateForm(forms.ModelForm):
         model = models.Review
         fields = ('employee','goals_achievment', 'goals_review', 'teamwork', 'teamwork_review', 'innovation', 'innovation_review', 'work_ethics', 'work_ethics_review', 'total_review')
 
+
+class GoalJournalForm(forms.ModelForm):
+    class Meta:
+        model = models.GoalJournal
+        fields = ('journal', 'goal', 'owner')
+        widgets = {
+            'goal': forms.HiddenInput(),
+            'owner': forms.HiddenInput(),
+        }
+

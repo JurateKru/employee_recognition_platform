@@ -5,10 +5,10 @@ from django.views import generic
 from django.forms.models import BaseModelForm
 from django.db.models import Q
 from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm, ReviewUpdateForm
+from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm, ReviewUpdateForm, GoalJournalForm
 from . models import Goal, Employee, Manager, Review
 
 
@@ -71,7 +71,6 @@ class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Goal
     form_class = GoalUpdateForm
     template_name = 'goals_management/update_goal.html'
-    success_url = reverse_lazy('goal_list')   
 
     def get_initial(self):
         initial = super().get_initial()
@@ -85,15 +84,18 @@ class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
         initial["progress"] = obj.progress
         return initial
     
+    def get_success_url(self) -> str:
+        return reverse('goal_detail', kwargs={'pk':self.get_object().pk})
+    
 
-class GoalDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Goal
-    template_name = 'goals_management/goal_detail.html' 
+# class GoalDetailView(LoginRequiredMixin, generic.DetailView):
+#     model = Goal
+#     template_name = 'goals_management/goal_detail.html' 
 
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        context['goal'] = get_object_or_404(Goal, id=self.kwargs['pk'])
-        return context
+#     def get_context_data(self, **kwargs: Any):
+#         context = super().get_context_data(**kwargs)
+#         context['goal'] = get_object_or_404(Goal, id=self.kwargs['pk'])
+#         return context
 
 
 class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -233,4 +235,37 @@ class ReviewListView(generic.ListView):
         qs = super().get_queryset()
         user = self.request.user
         return qs.filter(employee__user=user)
+    
+
+class GoalJournalDetailView(generic.edit.FormMixin, generic.DetailView):
+    model = Goal
+    template_name = 'goals_management/goal_detail.html'
+    form_class = GoalJournalForm
+    
+    def get_initial(self) -> Dict[str, Any]:
+        initial = super().get_initial()
+        initial['goal'] = self.get_object()
+        initial['owner'] = self.request.user
+        return initial 
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+    def form_valid(self, form: Any) -> HttpResponse:
+        form.instance.goal = self.get_object()
+        form.instance.owner = self.request.user
+        form.save()
+        messages.success(self.request, _('Goal journal added!'))
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        return reverse('goal_detail', kwargs={'pk':self.get_object().pk})
+
+
+
     

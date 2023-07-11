@@ -22,6 +22,14 @@
                     <span style="color: red;"><strong> Cancelled</strong></span>
                 {% else %}
                 {% endif %}
+                <br><i> Progress - </i>
+                <div class="progress-bar">
+                    <div class="progress-bar-all"></div>
+                    <div class="progress-bar-goal" style="width: {{ goal.progress }}%;"></div>
+                    <div class="start-text">Start 0%</div>
+                    <div class="end-text">Goal 100%</div>
+                    <div class="current-text">Current {{ goal.progress }}%</div>
+                  </div>
             </li>
         {% endfor %} 
     </ul>
