@@ -2,7 +2,7 @@
 {% block title %} Delete review {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Confirm Review Deleting </h1>
-<br><b>Review:</b> {{ review.employee }}
+<br><b>Review of:</b> {{ review.employee }}
 <br><b>Final score:</b> {{ review.get_total_review_display }}
 <form action="{{ request.path }}" method="post">
     {% csrf_token %}

@@ -125,7 +125,7 @@ footer {
 table {
   border-collapse: separate;
   border-spacing: 0 10px; /* Tarpas tarp eilučių: 0 horizontaliai, 10px vertikaliai */
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 input[type="text"],
@@ -434,5 +434,15 @@ td + td {
   margin-top: 60px;
 }
 
+.reviews-content{
+  background-color: white;
+  padding: 8px;
+  padding-bottom: 40px;
+  border-radius: 5px;
+  height: 7rem;
+  width: 20rem;
+  border: 1px solid black;
+  margin-right: 15px;
 
-
+  
+}

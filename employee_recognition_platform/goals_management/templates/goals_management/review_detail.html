@@ -6,29 +6,67 @@
 <div class= "requests">
     <h1>Review details:</h1>
     {% if review %}
-    <ul>  
-        <li>Employee: {{ review.employee }}
-                <br>
-                <br><i> Gaols achievment - </i> {{ review.goals_achievment }}
-                <br><i> Gaols review - </i> {{ review.get_goals_review_display }}
-                <br><i> Teamwork - </i> {{ review.teamwork }}
-                <br><i> Teamwork review - </i> {{ review.get_teamwork_review_display }}
-                <br><i> Innovation - </i> {{ review.innovation }}
-                <br><i> Innovation review - </i> {{ review.get_innovation_review_display }}
-                <br><i> Work ethics - </i> {{ review.work_ethics }}
-                <br><i> Work ethics review - </i> {{ review.get_work_ethics_review_display }}
-                <br><b> Total review - </b> {{ review.get_total_review_display }}
-                <br>
-                <br><i> Manager - </i> {{ review.manager }}
-        </li>
-    </ul>
+    <table>
+        <tr>
+            <td class="padding-buttom"><b>Employee: {{ review.employee }}</b></td>
+        </tr>
+        <tr>
+            <td>&#x1F3C6;<b> Goals Achievment:</b></td>
+            <td>&#x1F91D;<b> Teamwork:</b></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="reviews-content">
+                    <div>{{ review.goals_achievment }}</div>
+                </div>
+            </td>
+            <td>
+                <div class="reviews-content">
+                    <div>{{ review.teamwork }}</div>  
+                </div>
+            </td>                            
+        </tr>
+        <tr>
+            <td class="padding-buttom">{{ review.get_goals_review_display }}</td>
+            <td class="padding-buttom">{{ review.get_teamwork_review_display }}</td>                              
+        </tr>
+        <tr>
+            <td>&#x1F4A1;<b> Innovation:</b></td>
+            <td>&#x1F4BC;<b> Work Ethics:</b></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="reviews-content">
+                    <div>{{ review.innovation }}</div>
+                </div>
+            </td>
+            <td>
+                <div class="reviews-content">
+                    <div>{{  review.work_ethics }}</div>
+                </div>
+            </td>                           
+        </tr>
+        <tr>
+            <td class="padding-buttom">{{ review.get_innovation_review_display }}</td>
+            <td class="padding-buttom">{{ review.get_work_ethics_review_display }}</td>                              
+        </tr>
+        <tr>
+
+            <td class="big" colspan="2"><b>Total Review:</b>{{ review.get_total_review_display }}</td>
+        </tr>
+        <tr>
+            <td><b>Manager: {{ review.manager }}</b></td>
+        </tr>
+
+    </table>
+
     {% else %}
         <p>No reviews found</p>
     {% endif %}
     {% if  user == review.manager.user %}
         <div class="parent-element">
-            <a class='button' href="{% url 'update_review' review.pk %}"><strong>Update Review<strong></a>
-            <a class='button' href="{% url 'delete_review' review.pk %}"><strong>Delete Review<strong></a>
+            <a class='button' href="{% url 'update_review' review.pk %}">Update Review</a>
+            <a class='button' href="{% url 'delete_review' review.pk %}">Delete Review</a>
         </div> 
     {% endif %}
 </div>
