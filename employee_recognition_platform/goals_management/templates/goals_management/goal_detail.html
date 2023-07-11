@@ -13,20 +13,55 @@
             <td><b>Goal:</b></td>
         </tr>
         <tr>
-            <td class='title-description'>#{{ goal.id }}. {{ goal.title }}</td>
-            <td colspan="13" class="table-cell-align-left">
-                <b>Start date:</b> {{ goal.start_date }} <br>
-                <b>End date:</b> {{ goal.end_date }}
+            <td>
+            <div class='table-spacing'>
+                <div class='title-description'>#{{ goal.id }}. {{ goal.title }}</div>
             </td>
+            </div>
         </tr>
         <tr>
             <td><b>Content:</b></td>
         </tr>
         <tr>
-            <td class='content-description'>{{ goal.description }}</td>
+            <td>
+                <div class='table-spacing'>
+                    <div class='content-description'>{{ goal.description }}</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Start date:</b> <span class="detail-label"><i class="far fa-calendar-alt"></i></span>{{ goal.start_date|date:"Y-m-d" }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class='table-spacing'>
+                    <b>End date:</b> <span class="detail-label"><i class="far fa-calendar-alt"></i></span> {{ goal.end_date|date:"Y-m-d" }}  
+                </div>  
+            </td>
         </tr>
         <tr>
             <td><b>Priority:</b> {{ goal.get_priority_display }}</td>
+        <tr>
+            <td>
+                <div class='table-spacing-2'>
+                    <div>
+                        <b>Status:</b> {% if goal.status == 0 %}
+                        <span style="color: orange;"><strong>Planned</strong></span>
+                    {% elif goal.status == 1 %}
+                        <span style="color: rgb(35, 80, 186);"><strong>In progress</strong></span>
+                    {% elif goal.status == 2 %}
+                        <span style="color: green;"><strong>Complete</strong></span>
+                    {% elif goal.status == 3 %}
+                        <span style="color: grey;"><strong>On hold</strong></span>
+                    {% elif goal.status == 4 %}
+                        <span style="color: red;"><strong>Cancelled</strong></span>
+                    {% endif %}
+                    </div>
+                </div>
+            </td>
+        </tr>
         </tr>
             <td><b>Progress:</b></td>
         </tr>
@@ -41,20 +76,6 @@
                 </div>
             </td>
         </tr>
-        <tr>
-            <td><b>Status:</b> {% if goal.status == 0 %}
-                <span style="color: orange;"><strong>Planned</strong></span>
-            {% elif goal.status == 1 %}
-                <span style="color: rgb(35, 80, 186);"><strong>In progress</strong></span>
-            {% elif goal.status == 2 %}
-                <span style="color: green;"><strong>Complete</strong></span>
-            {% elif goal.status == 3 %}
-                <span style="color: grey;"><strong>On hold</strong></span>
-            {% elif goal.status == 4 %}
-                <span style="color: red;"><strong>Cancelled</strong></span>
-            {% endif %}
-            </td>
-        </tr>
     </table>
     {% else %}
         <p>No goals found</p>
@@ -67,29 +88,32 @@
 
 <div class="journal-section">
     <h3>Goal Journal:</h3>
+    {% if goal.journals.count > 0 %}
+        <ul>
+            {% for journal in goal.journals.all  %}
+                <div class='journal-background'>
+                    {{ journal.journal_date|date:"Y-m-d H:i" }}<br>
+                    {{ journal.journal }}
+                </div>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class='journal-background'>
+            Journal is empty.
+        </div>
+    {% endif %}
     {% if user == goal.owner %}
-        <form method="post" action="{{ request.path }}">
-            <h4>Add a new journal</h4>
+        <form method="post" action="{{ request.path }}?goal_id={{ goal.id }}">
+            <h4>Add a new journal:</h4>
             {% csrf_token %}
-            {% comment %} <table>
-                <tr>
-                    <td>{{ form.journal }}</td>
-                </tr>
-            </table> {% endcomment %}
             {{ form.journal }}
-            <button class='button' type="submit">Add</button>
+            <button type="submit">Add</button>
         </form>
     {% else %}
         <p class="box box-info">If you want to add a journal, you have to <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sing up</a></p>
     {% endif %}
-    {% if goal.journals.count > 0 %}
-        <ul>
-            {% for journal in goal.journals.all  %}
-            <li>{{ journal.journal_date }} added by {{ journal.owner }}<br>
-                {{ journal.journal }}
-            </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
 </div>
+
+
 {% endblock content %}

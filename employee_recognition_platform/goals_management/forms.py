@@ -40,6 +40,8 @@ class ReviewUpdateForm(forms.ModelForm):
 
 
 class GoalJournalForm(forms.ModelForm):
+    journal = forms.CharField(widget=forms.Textarea(attrs={'class': 'small-input'}))
+
     class Meta:
         model = models.GoalJournal
         fields = ('journal', 'goal', 'owner')
