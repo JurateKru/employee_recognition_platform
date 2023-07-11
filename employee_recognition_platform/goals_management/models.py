@@ -130,16 +130,16 @@ class Goal(models.Model):
     )
     PROGRESS_CHOICES = (
         (0, _('🟣 0 %')),
-        (1, _('🟣 10 %')),
-        (2, _('🟠 20 %')),
-        (3, _('🟠 30 %')),
-        (4, _('🟠 40 %')),
-        (5, _('🟡 50 %')),
-        (6, _('🟡 60 %')),
-        (7, _('🟡 70 %')),
-        (8, _('🟢 80 %')),
-        (9, _('🟢 90 %')),
-        (10, _('🟢 100 %')),
+        (10, _('🟣 10 %')),
+        (20, _('🟠 20 %')),
+        (30, _('🟠 30 %')),
+        (40, _('🟠 40 %')),
+        (50, _('🟡 50 %')),
+        (60, _('🟡 60 %')),
+        (70, _('🟡 70 %')),
+        (80, _('🟢 80 %')),
+        (90, _('🟢 90 %')),
+        (100, _('🟢 100 %')),
     )
     progress = models.PositiveSmallIntegerField(
         _("progress"), 
@@ -224,3 +224,31 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return reverse("review_detail", kwargs={"pk": self.pk})
+
+
+class GoalJournal(models.Model):
+    goal = models.ForeignKey(
+        Goal, 
+        verbose_name=_("goal"), 
+        on_delete=models.CASCADE,
+        related_name='journals')
+    owner = models.ForeignKey(
+        User, 
+        verbose_name=_("owner"), 
+        on_delete=models.SET_NULL,
+        related_name='goal_journals',
+        null=True, blank=True,
+        )
+    journal_date = models.DateTimeField(_("updated date"), auto_now_add=True)
+    journal = models.TextField(_("journal"), max_length=4000)
+    
+    class Meta:
+        ordering = ['-journal_date']
+        verbose_name = _("goal journal")
+        verbose_name_plural = _("goal journals")
+
+    def __str__(self):
+        return f"{self.journal_date}: {self.owner}"
+
+    def get_absolute_url(self):
+        return reverse("goaljournal_detail", kwargs={"pk": self.pk})
