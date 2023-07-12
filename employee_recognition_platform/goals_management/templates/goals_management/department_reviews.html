@@ -7,8 +7,8 @@
 {% block content %}
 <div class="filter">
     <form method="GET">
-        <label for="year">Filter by Year:</label>
-        <select id="year" name="year">
+        <label for="year"><b>Filter by: <br><br><i>Year:</i></b></label>
+        <select id="year" name="year" class="select-with-label">
             {% if years %}
                 <option value="" {% if selected_year == '' %}selected{% endif %}>All</option>
                 {% for year in years %}
@@ -19,16 +19,16 @@
             {% endif %}
         </select>
         
-        <label for="employee">Filter by Employee:</label>
-        <select id="employee" name="employee">
+        <label for="employee"> <b><i>Employee:</b></i></label>
+        <select id="employee" name="employee" class="select-with-label">
             <option value="">All</option>
             {% for employee in employees %}
                 <option value="{{ employee.id }}" {% if employee.id|stringformat:'s' == selected_employee %}selected{% endif %}>{{ employee }}</option>
             {% endfor %}
         </select>
         
-        <label for="review">Filter by Review:</label>
-        <select id="review" name="review">
+        <label for="review"><b><i>Review:</b></i></label>
+        <select id="review" name="review" >
             <option value="">All</option>
             {% for score, label in reviews %}
                 <option value="{{ score }}" {% if score|stringformat:'s' == selected_review %}selected{% endif %}>{{ label }}</option>
@@ -43,7 +43,7 @@
     {% if department_reviews %}
     <ul>
         {% for review in department_reviews %}
-        <li><a href="{% url 'review_detail' review.pk %}">{{ review.employee }}, {{ review.get_total_review_display }}, {{ review.created_date|date:'Y' }}</a></li>
+        <li><a href="{% url 'review_detail' review.pk %}"><b>Employee: {{ review.employee }}</a><br></b>Year: {{ review.created_date|date:'Y' }}<br>Total score: {{ review.get_total_review_display }}</li>
         {% endfor %}
     </ul>
 {% else %}
