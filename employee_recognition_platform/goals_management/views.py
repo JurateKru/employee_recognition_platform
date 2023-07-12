@@ -1,9 +1,11 @@
 from typing import Any, Dict
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
 from django.forms.models import BaseModelForm
 from django.db.models import Q
+from django.db.models.functions import ExtractYear
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
@@ -175,10 +177,46 @@ class DepartmentReviewsListView(LoginRequiredMixin, UserPassesTestMixin, generic
 
     def get_queryset(self):
         queryset = Review.objects.filter(manager=self.request.user.manager)
+        year_filter = self.request.GET.get('year')
+        employee_filter = self.request.GET.get('employee')
+        review_filter = self.request.GET.get('review')
+        
+        if year_filter:
+            try:
+                year_filter = int(year_filter)
+                queryset = queryset.filter(created_date__year=year_filter)
+            except ValueError:
+                pass
+        
+        if employee_filter:
+            queryset = queryset.filter(employee_id=employee_filter)
+        
+        if review_filter:
+            queryset = queryset.filter(total_review=int(review_filter))
+        
         return queryset
 
     def test_func(self) -> bool | None:
         return hasattr(self.request.user, "manager")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['years'] = Review.objects.dates('created_date', 'year')
+        context['employees'] = Employee.objects.all()
+        context['reviews'] = Review.SCORE_CHOICES
+        context['selected_year'] = self.request.GET.get('year', '')
+        context['selected_employee'] = self.request.GET.get('employee', '')
+        context['selected_review'] = self.request.GET.get('review', '')
+        return context
+    
+    def department_reviews(request):
+        year_filter = request.GET.get('year')
+        reviews = Review.objects.all()
+        if year_filter:
+            reviews = reviews.filter(created_date__year=year_filter)
+        years = Review.objects.dates('created_date', 'year')
+        context = {'department_reviews': reviews, 'years': years}
+        return render(request, 'department_reviews.html', context)
     
 
 class ReviewDetailView(LoginRequiredMixin, generic.DetailView):

@@ -33,10 +33,12 @@ class ReviewCreateForm(forms.ModelForm):
         fields =('employee', 'goals_achievment', 'goals_review', 'teamwork', 'teamwork_review', 'innovation', 'innovation_review', 'work_ethics', 'work_ethics_review', 'total_review')
 
 
+
 class ReviewUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Review
         fields = ('employee','goals_achievment', 'goals_review', 'teamwork', 'teamwork_review', 'innovation', 'innovation_review', 'work_ethics', 'work_ethics_review', 'total_review')
+
 
 
 class GoalJournalForm(forms.ModelForm):

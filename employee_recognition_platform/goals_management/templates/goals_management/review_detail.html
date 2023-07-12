@@ -8,7 +8,10 @@
     {% if review %}
     <table>
         <tr>
-            <td class="padding-buttom"><b>Employee: {{ review.employee }}</b></td>
+            <td><b>Employee: {{ review.employee }}</b></td>
+         </tr>
+        <tr>
+            <td class="padding-buttom"><b>Creation date: </b>{{ review.created_date }}</td>
         </tr>
         <tr>
             <td>&#x1F3C6;<b> Goals Achievment:</b></td>
