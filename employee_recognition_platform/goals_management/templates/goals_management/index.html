@@ -2,5 +2,17 @@
 {% load static %}
 {% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
 {% block content %}
-<h1> Welcome to Goals Managment System</h1>
+<div class= "home">
+    <div class="wrapper">
+        <ul class="dynamic-txts">
+            <li><span>Change</span></li>
+            <li><span>Culture</span></li>
+            <li><span>Connection</span></li>
+        </ul>
+        <div class="static-txt">never happened<br>on a whiteboard</div>
+    </div>
+    <h1>Inspire employees with the world’s<br>#1 employee performance management system</h1><br>
+    <h1 style="font-size: 20px;">-- Try -- </h1>
+    <img class="logo-home" src="{% static 'css\img\logo.PNG' %}">
+</div>
 {% endblock content %}

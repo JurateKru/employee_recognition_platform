@@ -161,6 +161,11 @@ img.logo {
   border-radius: 6px;
 }
 
+img.logo-home {
+  border: 1px solid rgb(122, 116, 116);
+  border-radius: 6px;
+}
+
 .confirm-button {
   background-color: rgb(77, 199, 232);
   color: black;
@@ -490,6 +495,74 @@ td + td {
   margin-top: 10px;
 }
 
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 120px;
+}
+
+.wrapper {
+  display: inline-flex;
+  margin-bottom: 40px;
+}
+
+.wrapper .static-txt {
+  color: black;
+  font-size: 60px;
+  font-weight: 400;
+  margin-left: 15px;
+}
+
+.dynamic-txts {
+  height: 60px;
+  line-height: 60px;
+  background: darkblue;
+  overflow: hidden;
+  padding-left: 10px;
+ }
+
+.dynamic-txts li {
+  color: whitesmoke;
+  list-style: none;
+  font-size: 50px;
+  font-weight: 500;
+  position: relative;
+  top: 0;
+  animation: slide 3s steps(3) infinite;
+  padding: 0 30px;
+  padding-left: 10px;
+} 
+
+@keyframes slide {
+  100%{
+    top: -180px
+  }
+}
+
+.dynamic-txts li span{
+  position: relative;
+}
+
+.dynamic-txts li span::after {
+  content: "";
+  position: relative;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: darkblue;
+  animation: typing 1.5s steps(10) infinite;
+}
+
+  @keyframes typing {
+    100%{
+      left: 100%;
+      margin: 0 -35px 0 35px;
+    }
+  }
+
 .requests ul {
   margin-bottom: 20px; /* Didelis tarpas apačioje */
   list-style-type: none;
@@ -525,3 +598,4 @@ td + td {
   border-bottom-style: solid; /* Stiliaus nurodymas */
   border-bottom-color: #999999;
 }
+
