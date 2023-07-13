@@ -121,7 +121,15 @@ class DepartmentEmployeesListView(LoginRequiredMixin, UserPassesTestMixin, gener
     def get_queryset(self):
         manager = get_object_or_404(Manager, user=self.request.user)
         queryset = Employee.objects.filter(manager=manager)
+        status_filter = self.request.GET.get('status')
+        if status_filter:
+            queryset = queryset.filter(status=status_filter)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['status_filter'] = self.request.GET.get('status')
+        return context
 
     def test_func(self) -> bool | None:
         return hasattr(self.request.user, "manager")
@@ -161,7 +169,8 @@ class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
         initial =  super().get_initial()
         manager = get_object_or_404(Manager, user=self.request.user)
         initial['manager'] = manager
-        initial['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
+        if "pk" in self.kwargs:
+            initial['employee'] = get_object_or_404(Employee, id=self.kwargs['pk'])
         return initial
     
     def form_valid(self, form: BaseModelForm) -> HttpResponse:

@@ -3,16 +3,31 @@
 {% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
 {% block title %}Department employees{% endblock title %}
 {% block content %}
-<div class= "requests">
+<div class="filter">
+    <form method="GET">
+        <label for="status"><b>Filter by: <br><br><i>Employment status:</i></b></label>
+        <select id="status" name="status">
+            <option value="" {% if status_filter == '' %}selected{% endif %}>All</option>
+            <option value="0" {% if status_filter == '0' %}selected{% endif %}>Active</option>
+            <option value="1" {% if status_filter == '1' %}selected{% endif %}>Terminated</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<div class="requests">
     <h1>Department employees</h1>
     {% if employees %}
     <ul>
         {% for employee in employees %}
-            <li><a class='button' href="{% url 'employee_detail' employee.pk %}">Employee: {{ employee.first_name }} {{ employee.last_name}}</a></li>
+            <li>
+                <a href="{% url 'employee_detail' employee.pk %}"><b>Employee: {{ employee.first_name }} {{ employee.last_name}}</a></b><br>
+                Position: {{ employee.position }}<br>
+                Employment status: {{ employee.get_status_display }}
+             </li>
         {% endfor %} 
     </ul>
     {% else %}
     <p>No employee found</p>
     {% endif %}
-{% endblock content %}
 </div>
+{% endblock content %}

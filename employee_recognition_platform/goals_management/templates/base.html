@@ -60,6 +60,7 @@
                     <a {% if request.resolver_match.url_name == 'create_goal' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'create_goal' %}">Create Goal</a>
                     <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">My Goals</a>
                     <a {% if request.resolver_match.url_name == 'employees_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'employees_list' %}">Department Employees</a>
+                    <a {% if request.resolver_match.url_name == 'create_review_for_any' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'create_review_for_any' %}">Create Review</a>
                     <a {% if request.resolver_match.url_name == 'department_reviews' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'department_reviews' %}">Department Reviews</a>
                 {% endif %}
               </div>

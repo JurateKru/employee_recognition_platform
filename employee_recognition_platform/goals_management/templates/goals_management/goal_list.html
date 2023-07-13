@@ -8,8 +8,8 @@
     {% if goal_list %}
     <ul> 
         {% for goal in goal_list %}
-            <li><a href="{% url 'goal_detail' goal.pk %}">Goal: #{{ goal.id }}, {{goal.title}}</a>
-                <br><i> Status - </i>
+            <li><a href="{% url 'goal_detail' goal.pk %}"><b>Goal: #{{ goal.id }}, {{goal.title}}</b></a>
+                <br> Status - 
                 {% if goal.status == 0 %} 
                     <span style="color: orange;"><strong> Planned</strong></span>
                 {% elif goal.status == 1 %} 
@@ -22,7 +22,7 @@
                     <span style="color: red;"><strong> Cancelled</strong></span>
                 {% else %}
                 {% endif %}
-                <br><i> Progress - </i>
+                <br> Progress - 
                 <div class="progress-bar">
                     <div class="progress-bar-all"></div>
                     <div class="progress-bar-goal" style="width: {{ goal.progress }}%;"></div>
