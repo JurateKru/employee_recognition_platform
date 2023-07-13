@@ -24,7 +24,7 @@
                     <a class="button" href="{% url 'signup' %}">Sign up</a>
                 {% else %}
                     <div style="display: flex; align-items: center;">
-                        <form action="{% url 'search' %}" method="GET" class="search-form" style="margin-right: 10px;">
+                        <form action="{% url 'search' %}" method="GET" style="margin-right: 10px;">
                             <input type="text" name="query" placeholder="Search">
                             <button class="button" type="submit"><i class="fas fa-search"></i></button>
                         </form>

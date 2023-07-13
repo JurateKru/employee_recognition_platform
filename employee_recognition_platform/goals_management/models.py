@@ -166,6 +166,7 @@ class Review(models.Model):
         (8, _('\U0001F7E1 Meets Expectations')),
         (15, _('\U0001F7E2 Exceeds Expectations')),
     )
+    created_date = models.DateTimeField(_("created date"), auto_now=False, auto_now_add=False, default=now)
     goals_achievment = HTMLField(_("goals achievment"), max_length=2000, db_index=True, blank=True, null=True)
     goals_review = models.PositiveSmallIntegerField(
         _("goals review"), 
@@ -214,6 +215,7 @@ class Review(models.Model):
         related_name="rewiews",
         null=True, blank=True,
     )
+
 
     class Meta:
         verbose_name = _("review")

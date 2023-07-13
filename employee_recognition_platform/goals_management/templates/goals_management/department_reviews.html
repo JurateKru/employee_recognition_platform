@@ -5,16 +5,49 @@
 {% endblock stylesheet %}
 {% block title %}Department reviews{% endblock title %}
 {% block content %}
+<div class="filter">
+    <form method="GET">
+        <label for="year"><b>Filter by: <br><br><i>Year:</i></b></label>
+        <select id="year" name="year" class="select-with-label">
+            {% if years %}
+                <option value="" {% if selected_year == '' %}selected{% endif %}>All</option>
+                {% for year in years %}
+                    <option value="{{ year|date:'Y' }}" {% if year|date:'Y' == selected_year %}selected{% endif %}>{{ year|date:'Y' }}</option>
+                {% endfor %}
+            {% else %}
+                <option value="" selected disabled>No years available</option>
+            {% endif %}
+        </select>
+        
+        <label for="employee"> <b><i>Employee:</b></i></label>
+        <select id="employee" name="employee" class="select-with-label">
+            <option value="">All</option>
+            {% for employee in employees %}
+                <option value="{{ employee.id }}" {% if employee.id|stringformat:'s' == selected_employee %}selected{% endif %}>{{ employee }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="review"><b><i>Review:</b></i></label>
+        <select id="review" name="review" >
+            <option value="">All</option>
+            {% for score, label in reviews %}
+                <option value="{{ score }}" {% if score|stringformat:'s' == selected_review %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Filter</button>
+    </form>
+</div>
 <div class="requests">
     <h1>Department reviews</h1>
     {% if department_reviews %}
     <ul>
         {% for review in department_reviews %}
-            <li><a href="{% url 'review_detail' review.pk %}">{{ review.employee }}, {{ review.get_total_review_display }}</a></li>
+        <li><a href="{% url 'review_detail' review.pk %}"><b>Employee: {{ review.employee }}</a><br></b>Year: {{ review.created_date|date:'Y' }}<br>Total score: {{ review.get_total_review_display }}</li>
         {% endfor %}
     </ul>
-    {% else %}
+{% else %}
     <p>No reviews found</p>
-    {% endif %}
+{% endif %}
 </div>
 {% endblock content %}

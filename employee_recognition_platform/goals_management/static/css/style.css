@@ -562,3 +562,40 @@ td + td {
       margin: 0 -35px 0 35px;
     }
   }
+
+.requests ul {
+  margin-bottom: 20px; /* Didelis tarpas apačioje */
+  list-style-type: none;
+  padding: 0;
+}
+
+.requests ul li {
+  margin-bottom: 30px; /* Tarpas tarp sąrašo elementų */
+}
+
+.requests ul li a {
+  color: black; /* Nuorodos spalva - juoda */
+  text-decoration: underline; /* Apatinis pabraukimas */
+}
+.requests h1{
+  margin-bottom: 50px;
+}
+
+.select-with-label {
+  margin-right: 20px; /* Tarpas tarp select ir label */
+}
+.filter select {
+  border-left-width: 2px;
+  border-left-style: solid; /* Stiliaus nurodymas */
+  border-left-color: black;
+  border-top-width: 2px;
+  border-top-style: solid; /* Stiliaus nurodymas */
+  border-top-color: black;
+  border-right-width: 2px;
+  border-right-style: solid; /* Stiliaus nurodymas */
+  border-right-color: #999999;
+  border-bottom-width: 2px;
+  border-bottom-style: solid; /* Stiliaus nurodymas */
+  border-bottom-color: #999999;
+}
+
