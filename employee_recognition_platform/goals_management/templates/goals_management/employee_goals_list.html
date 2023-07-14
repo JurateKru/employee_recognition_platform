@@ -3,12 +3,43 @@
 {% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
 {% block title %}Employee's Goals{% endblock title %}
 {% block content %}
+<div class="filter">
+    <form method="GET">
+        <label for="priority"><b>Filter by: <br><br><i>Priority:</i></b></label>
+        <select name="priority" id="priority">
+            <option value="all" {% if request.GET.priority == 'all' %}selected{% endif %}>All</option>
+            <option value="0" {% if request.GET.priority == '0' %}selected{% endif %}>High</option>
+            <option value="1" {% if request.GET.priority == '1' %}selected{% endif %}>Medium</option>
+            <option value="2" {% if request.GET.priority == '2' %}selected{% endif %}>Low</option>
+        </select>
+        <label for="status"><b><i>Status:</b></i></label>
+        <select name="status" id="status">
+            <option value="all" {% if request.GET.status == 'all' %}selected{% endif %}>All</option>
+            <option value="0" {% if request.GET.status == '0' %}selected{% endif %}>Planned</option>
+            <option value="1" {% if request.GET.status == '1' %}selected{% endif %}>In progress</option>
+            <option value="2" {% if request.GET.status == '2' %}selected{% endif %}>Complete</option>
+            <option value="3" {% if request.GET.status == '3' %}selected{% endif %}>On hold</option>
+            <option value="4" {% if request.GET.status == '4' %}selected{% endif %}>Cancelled</option>
+        </select>
+        <label for="start_date"><b><i>Start date:</b></i></label>
+        <input type="date" name="start_date" id="start_date" value="{% if request.GET.start_date %}{{ request.GET.start_date }}{% endif %}">
+        <label for="end_date"><b><i>End date:</b></i></label>
+        <input type="date" name="end_date" id="end_date" value="{% if request.GET.end_date %}{{ request.GET.end_date }}{% endif %}">
+        <button type="submit">Filter</button>
+    </form>
+</div>
 <div class= "requests">
+    
     <h1>Employee's Goals:</h1>
     {% if goals %}
     <ul>
         {% for goal in goals %}
             <li><b>Goal: #{{ goal.id }} {{ goal.title}}</b>
+                <div class= "content-width">
+                <hr><b> Content -</b> {{ goal.description }}<br>
+                </div>
+                <br> <i class="far fa-calendar-alt"></i> Start date -  {{ goal.start_date }}
+                <br> <i class="far fa-calendar-alt"></i> End date -  {{ goal.end_date }}<br>
                 <br> Status -
                 {% if goal.status == 0 %} 
                     <span style="color: orange;"><strong> Planned</strong></span>
@@ -22,9 +53,8 @@
                     <span style="color: red;"><strong> Cancelled</strong></span>
                 {% else %}               
                 {% endif %}
-                    <br> Content - {{ goal.description }}
-                    <br> <i class="far fa-calendar-alt"></i> Start date -  {{ goal.start_date }}
-                    <br> <i class="far fa-calendar-alt"></i> End date -  {{ goal.end_date }}
+                
+                    
                     <br> Priority -  {{ goal.get_priority_display }}
                     <br> Progress - 
                     <div class="progress-bar">

@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Search Results</title>
-</head>
-<body>
-    <h1>Search Results</h1>
-    
-    <p>Showing results for: "{{ query }}"</p>
-    
+{% extends 'base.html' %}
+
+{% block content %}
     {% if results %}
+        <h1>Search of "{{ query }}" results:</h1>
         <ul>
             {% for result in results %}
-                <li>{{ result }}</li>
+                {% if result.get_class_name == 'Goal' %}
+                    <li><a href="{{ result.get_absolute_url }}">{{ result.title }}</a></li>
+                {% elif result.get_class_name == 'Review' %}
+                    <li><a href="{{ result.get_absolute_url }}">{{ result.employee }} Review</a></li>
+                {% endif %}
             {% endfor %}
         </ul>
     {% else %}
         <p>No results found.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

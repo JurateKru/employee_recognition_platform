@@ -18,14 +18,14 @@ def index(request):
     return render(request, 'goals_management/index.html')
 
 def search_view(request):
-    query = request.GET.get('q')
+    query = request.GET.get('query')
     if query:
-        results = Goal.objects.filter(Q(title__icontains=query) | 
-                                      Q(status__icontains=query))
+        goal_results = Goal.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        review_results = Review.objects.filter(Q(goals_achievment__icontains=query) | Q(teamwork__icontains=query) | Q(innovation__icontains=query) | Q(work_ethics__icontains=query))
+        results = list(goal_results) + list(review_results)
     else:
-        results = Goal.objects.none()
-    return render(request, 'search_results.html', {'results': results, 'query': query})
-
+        results = []
+    return render(request, 'goals_management/search_results.html', {'results': results, 'query': query})
 
 def smart(request):
     grid_data = [
@@ -142,7 +142,19 @@ class DepartmentGoalsListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         manager = get_object_or_404(Manager, user=self.request.user)
         employee = manager.employees.get(id=self.kwargs['pk'])
+        priority = self.request.GET.get('priority')
+        status = self.request.GET.get('status')
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
         queryset = Goal.objects.filter(owner__employee=employee)
+        if priority is not None and priority != 'all':
+            queryset = queryset.filter(priority=priority)
+        if status is not None and status != 'all':
+            queryset = queryset.filter(status=status)
+        if start_date and end_date:
+            queryset = queryset.filter(
+                Q(start_date__gte=start_date) & Q(end_date__lte=end_date)
+            )
         return queryset
 
     def test_func(self) -> bool | None:

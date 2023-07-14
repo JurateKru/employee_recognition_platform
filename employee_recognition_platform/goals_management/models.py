@@ -155,9 +155,12 @@ class Goal(models.Model):
     def __str__(self):
         status = dict(Goal.GOAL_STATUS)[self.status]
         return f'{self.title}, {status}'
+    
+    def get_class_name(self):
+        return self.__class__.__name__
 
     def get_absolute_url(self):
-        return reverse("goal_detail", kwargs={"pk": self.pk})
+        return reverse("goal_detail", kwargs={'pk': self.pk})
 
 
 class Review(models.Model):
@@ -223,9 +226,12 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.employee}, {self.total_review}'
+    
+    def get_class_name(self):
+        return self.__class__.__name__
 
     def get_absolute_url(self):
-        return reverse("review_detail", kwargs={"pk": self.pk})
+        return reverse("review_detail", kwargs={'pk': self.pk})
 
 
 class GoalJournal(models.Model):

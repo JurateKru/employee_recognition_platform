@@ -8,7 +8,7 @@
     {% if review_list %}
     <ul> 
         {% for review in review_list %}
-            <li><a href="{% url 'review_detail' review.pk %}">Review: #{{ review.employee }}, {{review.get_total_review_display}}</a></li>
+            <li><a href="{% url 'review_detail' review.pk %}"><b>Review: #{{ review.id }}</a><br></b>Year: {{ review.created_date|date:'Y' }}<br>Total score: {{ review.get_total_review_display }}</li>
         {% endfor %} 
     </ul>
     {% else %}
