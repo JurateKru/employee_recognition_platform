@@ -19,4 +19,5 @@ urlpatterns = [
     path('department-reviews/detail/<int:pk>/', views.ReviewDetailView.as_view(), name='review_detail'),
     path('department-reviews/detail/<int:pk>/update/', views.ReviewUpdateView.as_view(), name='update_review'),
     path('department-reviews/detail/<int:pk>/delete/', views.ReviewDeleteView.as_view(), name='delete_review'),
+    path('statistics/', views.goal_status_chart, name='statistics'),
 ]
