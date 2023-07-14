@@ -49,6 +49,7 @@
                     <a {% if request.resolver_match.url_name == 'create_goal' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'create_goal' %}">Create Goal</a>
                     <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">My Goals</a>
                     <a {% if request.resolver_match.url_name == 'review_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'review_list' %}">Reviews</a>
+                    <a {% if request.resolver_match.url_name == 'statistics' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'statistics' %}">Dashboard</a>
                 {% endif %} 
                 {% if user.is_staff %}
                     {% if user.manager_user_profile.picture %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel='stylesheet' href="{% static 'css/style.css' %}">{% endblock stylesheet %}
+{% block content %}
+<h2>Dashboard</h2>
+<table class="dashboard">
+    <tr>
+      <td class="total-goals-cell">
+        <p class='total_goals'><b>Total Goals:<br>{{ total_goals }}</b></p>
+      </td>
+      <td>
+        <img src="data:image/png;base64,{{ progress_distribution }}" alt="progress distribution">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="data:image/png;base64,{{ priority_distribution }}" alt="Goal Count by Priority">
+      </td>
+      <td>
+        <img src="data:image/png;base64,{{ goal_distribution }}" alt="Goal Status Chart">
+      </td>
+    </tr>
+  </table>
+  
+{% endblock content %}

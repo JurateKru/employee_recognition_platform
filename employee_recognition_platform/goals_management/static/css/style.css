@@ -603,3 +603,23 @@ td + td {
   border-bottom-color: #999999;
 }
 
+.total_goals {
+  border: 1px solid rgb(122, 116, 116);
+  background-color: rgb(158, 196, 187);
+  padding: 3rem;
+  text-align: center;
+  width: 9rem;
+  font-size: large;
+}
+
+.total-goals-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* .dashboard {
+  border-spacing: 0 0;
+  margin-bottom: 15rem;
+} */

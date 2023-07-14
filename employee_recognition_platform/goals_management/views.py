@@ -12,6 +12,14 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from . forms import GoalCreateForm, GoalUpdateForm, ReviewCreateForm, ReviewUpdateForm, GoalJournalForm
 from . models import Goal, Employee, Manager, Review
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import base64
+from io import BytesIO
+from django.db import models
+import matplotlib.ticker as ticker
+from matplotlib.ticker import PercentFormatter
 
 
 def index(request):
@@ -88,16 +96,6 @@ class GoalUpdateView(LoginRequiredMixin, generic.UpdateView):
     
     def get_success_url(self) -> str:
         return reverse('goal_detail', kwargs={'pk':self.get_object().pk})
-    
-
-# class GoalDetailView(LoginRequiredMixin, generic.DetailView):
-#     model = Goal
-#     template_name = 'goals_management/goal_detail.html' 
-
-#     def get_context_data(self, **kwargs: Any):
-#         context = super().get_context_data(**kwargs)
-#         context['goal'] = get_object_or_404(Goal, id=self.kwargs['pk'])
-#         return context
 
 
 class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -325,7 +323,81 @@ class GoalJournalDetailView(generic.edit.FormMixin, generic.DetailView):
     
     def get_success_url(self) -> str:
         return reverse('goal_detail', kwargs={'pk':self.get_object().pk})
-
-
-
     
+
+
+def goal_status_chart(request):
+    goals = Goal.objects.filter(owner=request.user)
+    total_goals = goals.count()
+
+    #priority graph
+    priority_counts = goals.values('priority').annotate(count=models.Count('priority'))
+    priority_labels = [dict(Goal.PRIORITY_CHOICES)[priority_count['priority']][2:] for priority_count in priority_counts]
+    priority_values = [priority_count['count'] for priority_count in priority_counts]
+    sns.set(style="whitegrid")
+    plt.figure(figsize=(5, 4))
+    ax2 = sns.barplot(x=priority_labels, y=priority_values, palette='dark:#5A9_r')
+    ax2.set(xlabel='Priority')
+    ax2.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+    plt.title('Goals by Priority')
+    plt.tight_layout()
+    for i, v in enumerate(priority_values):
+        ax2.text(i, v, str(v), ha='center', va='bottom', color='black')
+    tmpfile2 = BytesIO()
+    plt.savefig(tmpfile2, format='png')
+    plt.close()
+    distribution2 = base64.b64encode(tmpfile2.getvalue()).decode('utf-8')
+
+    #status graph
+    status_counts = goals.values('status').annotate(count=models.Count('status'))
+    status_labels = [dict(Goal.GOAL_STATUS)[status_count['status']][2:] for status_count in status_counts]
+    status_values = [status_count['count'] for status_count in status_counts]
+    plt.figure(figsize=(5, 4))
+    ax = plt.subplot()
+    palette = sns.color_palette("BrBG", len(status_values)) 
+    ax.pie(status_values, labels=status_labels, colors=palette, autopct='%1.0f%%', startangle=90)
+    ax.axis('equal')
+    plt.title('Goal Distribution by Status')
+    plt.tight_layout()
+    centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+    fig = plt.gcf()
+    fig.gca().add_artist(centre_circle)
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    distribution = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
+
+    #progress graph
+    in_progress_goals = goals.filter(status=1)
+    on_hold_goals = goals.filter(status=3)
+    in_progress_progress_avg = in_progress_goals.aggregate(progress_avg=models.Avg('progress'))['progress_avg']
+    on_hold_progress_avg = on_hold_goals.aggregate(progress_avg=models.Avg('progress'))['progress_avg']
+
+    total_in_progress_goals = in_progress_goals.count()
+    total_on_hold_goals = on_hold_goals.count()
+
+    in_progress_progress_percentage_avg = (in_progress_progress_avg / 100) * total_in_progress_goals
+    on_hold_progress_percentage_avg = (on_hold_progress_avg / 100) * total_on_hold_goals
+    status_labels = ['In progress', 'On hold']
+    progress_percentages = [in_progress_progress_percentage_avg, on_hold_progress_percentage_avg]
+
+    plt.figure(figsize=(5, 2))
+    ax = sns.barplot(x=progress_percentages, y=status_labels, palette='dark:#5A9_r')
+    ax.set(xlabel='Progress (%)', ylabel='Status')
+    ax.xaxis.set_major_formatter(PercentFormatter(1, decimals=0))
+    plt.title('Average Goal Progress')
+    plt.subplots_adjust(left=0.3, bottom=0.3)  # Keičiama kairioji grafiko dalis
+    for i, v in enumerate(progress_percentages):
+        ax.text(v + 0.02, i, f'{int(v * 100)}%', ha='left', va='center', color='white')
+
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    distribution_prog = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
+
+
+    context = {'goal_distribution': distribution, 'priority_distribution': distribution2, 'total_goals': total_goals, 'progress_distribution': distribution_prog}
+
+    return render(request, 'goals_management\statistics.html', context)
+
+
