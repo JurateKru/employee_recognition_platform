@@ -80,4 +80,3 @@ class ManagerProfile(models.Model):
                 new_size = (300, 300)
                 pic.thumbnail(new_size)
                 pic.save(self.picture.path)
-
