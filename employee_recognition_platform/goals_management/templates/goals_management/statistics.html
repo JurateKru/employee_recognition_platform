@@ -9,15 +9,15 @@
         <p class='total_goals'><b>Total Goals:<br>{{ total_goals }}</b></p>
       </td>
       <td>
-        <img src="data:image/png;base64,{{ progress_distribution }}" alt="progress distribution">
+        <img src="{% static 'css/graphs/progress_graph.png' %}" alt="progress distribution">
       </td>
     </tr>
     <tr>
       <td>
-        <img src="data:image/png;base64,{{ priority_distribution }}" alt="Goal Count by Priority">
+        <img src="{% static 'css/graphs/priority_graph.png' %}" alt="Goal Count by Priority">
       </td>
       <td>
-        <img src="data:image/png;base64,{{ goal_distribution }}" alt="Goal Status Chart">
+        <img src="{% static 'css/graphs/status_graph.png' %}" alt="Goal Status Chart">
       </td>
     </tr>
   </table>
