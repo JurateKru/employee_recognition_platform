@@ -5,7 +5,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url(img/banner.jpeg);
+  background-image: url(img/background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  overflow-y: scroll;
   margin: 0;
   padding: 0;
 }
@@ -35,14 +41,20 @@ body {
   border-radius: 11px;
   background-color: whitesmoke;
   padding: 0.5rem;
+  margin-left: 0;
+  text-decoration: none;
+  color: black;
 }
 
 .top-buttons .button{
   margin-right: 10px;
   border: 1px solid rgb(122, 116, 116);
   border-radius: 11px;
-  background-color: #d4f3f2;
+  background-color: #ebd6bf;
   padding: 0.5rem;
+  margin-left: 0;
+  text-decoration: none;
+  color: black;
 }
 
 .sidebar-buttons .button:hover,
@@ -53,16 +65,24 @@ body {
   padding: 0.4rem;
   display: block;
   margin-right: 10px;
+  margin-left: 0;
+  text-decoration: none;
+  color: black;
 }
 
 .sidebar-buttons .button {
   border: 1px solid rgb(122, 116, 116);
   border-radius: 11px;
-  background-color: #d4f3f2;
+  background-color: #ebd6bf;
   padding: 0.4rem;
   display: block;
   margin-right: 10px;
+  margin-bottom: 0.1rem;
+  margin-left: 0;
+  text-decoration: none;
+  color: black;
 }
+
 .container {
   display: flex;
   flex: 1;
@@ -95,7 +115,6 @@ footer {
   text-align: center;
   margin: 0;
 }
-/* color: #6D6875;  */
 
 .form-row {
   display: flex;
@@ -124,7 +143,7 @@ footer {
 
 table {
   border-collapse: separate;
-  border-spacing: 0 10px; /* Tarpas tarp eilučių: 0 horizontaliai, 10px vertikaliai */
+  border-spacing: 0 10px;
   margin-bottom: 30px;
 }
 
@@ -148,7 +167,6 @@ textarea, select {
 table tr th td {
   padding: 5px;
   text-align: justify;
-
 }
 
 .big {
@@ -164,32 +182,11 @@ img.logo {
 img.logo-home {
   border: 1px solid rgb(122, 116, 116);
   border-radius: 6px;
+  width: 45rem;
 }
-
-.confirm-button {
-  background-color: rgb(77, 199, 232);
-  color: black;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-align: center;
-  margin-left: 55rem;
-  
-}
-
-.goal-detail-button {
-  border: 1px solid rgb(122, 116, 116);
-  border-radius: 7px;
-  background-color: #dee6e5;
-  padding: 0.3rem;
-  text-decoration: none;
-  color: black;
-  margin-top: 20px;
-}
-
 
 img.picture {
   max-width: 11vw;
-  /* border-radius: 1.5rem; */
   margin-bottom: 10px;
   border-radius: 50% / 100% 200%;
 } 
@@ -204,13 +201,26 @@ td + td {
   padding-left: 120px;
 }
 
-.button {
-  border: 1px solid rgb(122, 116, 116);
+.function-button {
+  color: black;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-right-color: black;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #999999;
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-top-color: #999999;
   border-radius: 7px;
-  background-color: #dee6e5;
-  padding: 0.3rem;
+  background-color: #e8f2f1;
+  margin-left: 1rem;
+  padding: 0.6rem;
   text-decoration: none;
-  color: black
+  font-weight: bold;
 }
 
 .custom-padding {
@@ -219,15 +229,6 @@ td + td {
 
 .padding-buttom {
   padding-bottom: 35px;
-}
-
-.goal-button {
-  background-color: rgb(77, 199, 232);
-  color: black;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 2rem;
-  margin-left: 10rem;
 }
 
 .profile-header h1 {
@@ -240,7 +241,6 @@ td + td {
   color: rgb(74, 71, 77);
   margin-top: 0;
   line-height: 1.5;
-
 }
 
 .profile-details {
@@ -248,11 +248,13 @@ td + td {
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 30px;
+  font-size: large;
 }
 
 .detail-row {
   display: flex;
   margin-bottom: 5px;
+  font-size: large;
 }
 
 .detail-label {
@@ -272,60 +274,69 @@ td + td {
   display: inline-block;
   width: fit-content;
 }
+
 .box-info {
   background-color: #cbddec;
 }
+
 .box-warning {
   background-color: #f4caa0;
 }
+
 .box-error {
   background-color: #f9a7a7;
 }
+
 .box-success {
   background-color: #cdf6c3;
 }
+
 .box-debug {
   background-color: #eeeeee;
 }
+
 .centered-body {
   display: flex;
   justify-content: left;
-  
 }
+
 .centered-section {
   display: flex;
   justify-content: left;
   align-items: flex-start;
-  margin-left: 18rem;
+  margin-left: 0rem;
 }
+
 .flex-container {
   display: flex;
   justify-content: center;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(5, 7rem);
   grid-gap: 10px;
-  background-color: #2b028a;
-  padding: 5rem;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  background-color: #523d83;
+  padding: 4rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .grid-item {
   padding: 10px;
 }
+
 .smart-cell {
-  color: white; /* Teksto spalva (pvz. raudona) */
-  background-color: #34cdbbb9; /* Fono spalva (pvz. šviesiai raudona) */
-  font-size: 50px; /* Teksto dydis (pvz. 16 pikseliai) */
-  font-family: Arial, sans-serif; /* Teksto šriftas (pvz. Arial, be serifo) */
-  border-width: 5px solid white; /* Langelio borderio storis (pvz. 2 pikseliai) */
-  border-radius: 5px; /* Langelio kampų užapvalinimas (pvz. 5 pikseliai) */
-  text-align: center; /* Teksto lygiavimas horizontaliai per vidurį */
-  display: flex; /* Naudojama vertikaliam teksto lygiavimui */
-  justify-content: center; /* Teksto lygiavimas horizontaliai per vidurį */
-  align-items: center; /* Teksto lygiavimas vertikaliai per vidurį */
+  color: white;
+  background-color: #34cdbbb9;
+  font-size: 50px;
+  font-family: Arial, sans-serif;
+  border-width: 5px solid white;
+  border-radius: 5px;
+  text-align: center;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
 }
 
 .smart-concept{
@@ -338,6 +349,7 @@ td + td {
   justify-content: center;
   align-items: center;
 }
+
 .goal-components{
   color: rgb(149, 142, 142); 
   background-color: white;
@@ -350,6 +362,7 @@ td + td {
   height: 180px;
   margin-bottom: 0;
 }
+
 .goal-letters{
   color: #34cdbbb9;
   background-color: white;
@@ -407,7 +420,7 @@ td + td {
 
 .progress-bar-goal {
   height: 100%;
-  background-color: blue;
+  background-color: rgb(49, 181, 99);
   position: absolute;
   top: 0;
   left: 0;
@@ -462,6 +475,7 @@ td + td {
   border: 1px solid black;
   margin-right: 15px;
 }
+
 .content-width{
   width: 20rem;
 }
@@ -502,9 +516,9 @@ td + td {
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
   margin-top: 120px;
 }
 
@@ -568,38 +582,39 @@ td + td {
   }
 
 .requests ul {
-  margin-bottom: 20px; /* Didelis tarpas apačioje */
+  margin-bottom: 20px;
   list-style-type: none;
   padding: 0;
 }
 
 .requests ul li {
-  margin-bottom: 30px; /* Tarpas tarp sąrašo elementų */
+  margin-bottom: 30px;
 }
 
 .requests ul li a {
-  color: black; /* Nuorodos spalva - juoda */
-  text-decoration: underline; /* Apatinis pabraukimas */
+  color: black;
+  text-decoration: underline;
 }
 .requests h1{
   margin-bottom: 50px;
 }
 
 .select-with-label {
-  margin-right: 20px; /* Tarpas tarp select ir label */
+  margin-right: 20px;
 }
+
 .filter select {
   border-left-width: 2px;
-  border-left-style: solid; /* Stiliaus nurodymas */
+  border-left-style: solid;
   border-left-color: black;
   border-top-width: 2px;
-  border-top-style: solid; /* Stiliaus nurodymas */
+  border-top-style: solid;
   border-top-color: black;
   border-right-width: 2px;
-  border-right-style: solid; /* Stiliaus nurodymas */
+  border-right-style: solid;
   border-right-color: #999999;
   border-bottom-width: 2px;
-  border-bottom-style: solid; /* Stiliaus nurodymas */
+  border-bottom-style: solid;
   border-bottom-color: #999999;
 }
 
@@ -618,8 +633,3 @@ td + td {
   align-items: center;
 }
 
-
-/* .dashboard {
-  border-spacing: 0 0;
-  margin-bottom: 15rem;
-} */

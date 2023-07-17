@@ -58,7 +58,7 @@
             <td class="big" colspan="2"><b>Total Review:</b>{{ review.get_total_review_display }}</td>
         </tr>
         <tr>
-            <td><b>Manager: {{ review.manager }}</b></td>
+            <td><b>Review created by: {{ review.manager }}</b></td>
         </tr>
 
     </table>
@@ -68,8 +68,8 @@
     {% endif %}
     {% if  user == review.manager.user %}
         <div class="parent-element">
-            <a class='button' href="{% url 'update_review' review.pk %}">Update Review</a>
-            <a class='button' href="{% url 'delete_review' review.pk %}">Delete Review</a>
+            <a class='function-button' href="{% url 'update_review' review.pk %}">Update Review</a>
+            <a class='function-button' href="{% url 'delete_review' review.pk %}">Delete Review</a>
         </div> 
     {% endif %}
 </div>

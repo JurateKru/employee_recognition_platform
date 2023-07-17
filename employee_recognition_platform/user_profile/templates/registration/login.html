@@ -13,7 +13,7 @@
     <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <p><button type="submit">Log in</button></p>
+    <p><button class="function-button" type="submit">Log in</button></p>
     </form>
     <p class="password-reset"><a href="{% url 'password_reset' %}"><strong>Forgot password?</strong></a></p>
     <p>If you do not have an account, please <a href="{% url 'signup' %}"><strong>sign up</strong></a>.</p>

@@ -24,7 +24,7 @@
           <span class="detail-value">{{ user_.employee.hire_date }}</span>
         </div>
       </div>
-      <a class="button" href="{% url 'profile_update' %}">Upload picture</a>
+      <a class="function-button" href="{% url 'profile_update' %}">Upload picture</a>
     </div>
   {% endif %}
   {% if user_ == request.user and user.is_staff %}
@@ -49,7 +49,7 @@
           <span class="detail-value">Hire date: {{ user_.manager.hire_date }}</span>
         </div>
       </div>
-      <a class="button" href="{% url 'manager_profile' %}">Update picture</a>
+      <a class="function-button" href="{% url 'manager_profile' %}">Update picture</a>
     </div>
   {% endif %}
 </div>

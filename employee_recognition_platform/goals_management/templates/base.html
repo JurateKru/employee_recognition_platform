@@ -57,7 +57,7 @@
                     {% else %}
                         <img class="picture" src="{% static 'css\img\default.jpg' %}">
                     {% endif %}
-                    <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
+                    <a {% if request.resolver_match.url_name == 'profile' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'profile' %}">My Profile</a>
                     <a {% if request.resolver_match.url_name == 'create_goal' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'create_goal' %}">Create Goal</a>
                     <a {% if request.resolver_match.url_name == 'goal_list' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'goal_list' %}">My Goals</a>
                     <a {% if request.resolver_match.url_name == 'statistics' %}class="button active"{% else %}class="button"{% endif %} href="{% url 'statistics' %}">My Dashboard</a>

@@ -81,8 +81,8 @@
         <p>No goals found</p>
     {% endif %}
     {% if user == goal.owner %}
-            <a class='goal-detail-button' href="{% url 'update_goal' goal.pk %}">Update Goal</a>
-            <a class='goal-detail-button' href="{% url 'delete_goal' goal.pk %}">Delete Goal</a>
+            <a class='function-button' href="{% url 'update_goal' goal.pk %}">Update Goal</a>
+            <a class='function-button' href="{% url 'delete_goal' goal.pk %}">Delete Goal</a>
     {% endif %}
 </div>
 
@@ -110,7 +110,7 @@
             {{ form.journal }}
             {{ form.goal }}
             {{ form.owner }}
-            <button type="submit">Add</button>
+            <button class="function-button" type="submit">Add</button>
         </form>
     {% else %}
         <p class="box box-info">If you want to add a journal, you have to <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sing up</a></p>

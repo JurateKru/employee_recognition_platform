@@ -7,7 +7,7 @@
 <form action="{{ request.path }}" method="post">
     {% csrf_token %}
     <h3>Delete?</h3>
-    <button class="button" type="submit">Yes</button>
-    <a class="button" href="{% url 'review_detail' review.pk %}">No</a>
+    <button class="function-button" type="submit">Yes</button>
+    <a class="function-button" href="{% url 'review_detail' review.pk %}">No</a>
 </form>
 {% endblock content %}

@@ -56,6 +56,11 @@ class GoalListView(generic.ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         user = self.request.user
+        status = self.request.GET.get('status')
+        
+        if status:
+            qs = qs.filter(status=status)
+        
         return qs.filter(owner=user)
 
 

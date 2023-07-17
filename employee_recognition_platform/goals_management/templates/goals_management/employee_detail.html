@@ -46,8 +46,8 @@
         <p>No employees found</p>
     {% endif %}
         <div class="parent-element">
-            <a class='button' href="{% url 'employee_goals_list' employee.pk %}">Review Goals</a>
-            <a class='button' href="{% url 'create_review' employee.pk %}">Create Review</a>
+            <a class='function-button' href="{% url 'employee_goals_list' employee.pk %}">Review Goals</a>
+            <a class='function-button' href="{% url 'create_review' employee.pk %}">Create Review</a>
         </div>
 </div>
 {% endblock content %}
