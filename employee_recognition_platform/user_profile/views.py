@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_protect
-from django.utils.timezone import now
 from . forms import ProfileUpdateForm, UserUpdateForm, ManagerProfileUpdateForm
 from . models import Profile
 from goals_management.models import Employee

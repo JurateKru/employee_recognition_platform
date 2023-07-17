@@ -5,21 +5,20 @@
 <h2>Dashboard</h2>
 <table class="dashboard">
     <tr>
-      <td class="total-goals-cell">
-        <p class='total_goals'><b>Total Goals:<br>{{ total_goals }}</b></p>
-      </td>
-      <td>
-        <img src="{% static 'css/graphs/progress_graph.png' %}" alt="progress distribution">
-      </td>
+        <td class="total-goals-cell">
+            <p class='total_goals'><b>Total Goals:<br>{{ total_goals }}</b></p>
+        </td>
+        <td>
+            <img src="{% static 'css/graphs/progress_graph.png' %}" alt="progress distribution">
+        </td>
     </tr>
     <tr>
-      <td>
-        <img src="{% static 'css/graphs/priority_graph.png' %}" alt="Goal Count by Priority">
-      </td>
-      <td>
-        <img src="{% static 'css/graphs/status_graph.png' %}" alt="Goal Status Chart">
-      </td>
+        <td>
+            <img src="{% static 'css/graphs/priority_graph.png' %}" alt="Goal Count by Priority">
+        </td>
+        <td>
+            <img src="{% static 'css/graphs/status_graph.png' %}" alt="Goal Status Chart">
+        </td>
     </tr>
-  </table>
-  
+</table>
 {% endblock content %}

@@ -1,11 +1,9 @@
 from typing import Any, Dict
-from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
 from django.forms.models import BaseModelForm
 from django.db.models import Q
-from django.db.models.functions import ExtractYear
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
@@ -17,12 +15,12 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from django.db import models
 import matplotlib.ticker as ticker
-from matplotlib.ticker import PercentFormatter
 import threading
 
 
 def index(request):
     return render(request, 'goals_management/index.html')
+
 
 def search_view(request):
     query = request.GET.get('query')
@@ -33,6 +31,7 @@ def search_view(request):
     else:
         results = []
     return render(request, 'goals_management/search_results.html', {'results': results, 'query': query})
+
 
 def smart(request):
     grid_data = [
@@ -57,10 +56,8 @@ class GoalListView(generic.ListView):
         qs = super().get_queryset()
         user = self.request.user
         status = self.request.GET.get('status')
-        
         if status:
-            qs = qs.filter(status=status)
-        
+            qs = qs.filter(status=status) 
         return qs.filter(owner=user)
 
 
@@ -203,20 +200,16 @@ class DepartmentReviewsListView(LoginRequiredMixin, UserPassesTestMixin, generic
         year_filter = self.request.GET.get('year')
         employee_filter = self.request.GET.get('employee')
         review_filter = self.request.GET.get('review')
-        
         if year_filter:
             try:
                 year_filter = int(year_filter)
                 queryset = queryset.filter(created_date__year=year_filter)
             except ValueError:
                 pass
-        
         if employee_filter:
             queryset = queryset.filter(employee_id=employee_filter)
-        
         if review_filter:
             queryset = queryset.filter(total_review=int(review_filter))
-        
         return queryset
 
     def test_func(self) -> bool | None:
@@ -315,7 +308,6 @@ class GoalJournalDetailView(generic.edit.FormMixin, generic.DetailView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            print('nepavyko')
             return self.form_invalid(form)
         
     def form_valid(self, form: Any) -> HttpResponse:
@@ -348,7 +340,6 @@ def goal_status_chart(request):
         tmpfile_priority_graph = 'goals_management/static/css/graphs/priority_graph.png'
         plt.savefig(tmpfile_priority_graph, format='png')
         plt.close()
-        # distribution2 = base64.b64encode(tmpfile_priority_graph.getvalue()).decode('utf-8')
 
         #status graph
         status_counts = goals.values('status').annotate(count=models.Count('status'))
@@ -367,18 +358,14 @@ def goal_status_chart(request):
         tmpfile_status_graph = 'goals_management/static/css/graphs/status_graph.png'
         plt.savefig(tmpfile_status_graph, format='png')
         plt.close()
-        # distribution = base64.b64encode(tmpfile_status_graph.getvalue()).decode('utf-8')
 
         #progress graph
         in_progress_goals = goals.filter(status=1)
         on_hold_goals = goals.filter(status=3)
-
         in_progress_progress_sum = in_progress_goals.aggregate(progress_sum=models.Sum('progress'))['progress_sum']
         on_hold_progress_sum = on_hold_goals.aggregate(progress_sum=models.Sum('progress'))['progress_sum']
-
         total_in_progress_goals = in_progress_goals.count()
         total_on_hold_goals = on_hold_goals.count()
-
         in_progress_progress_avg = in_progress_progress_sum / total_in_progress_goals if total_in_progress_goals > 0 else 0
         on_hold_progress_avg = on_hold_progress_sum / total_on_hold_goals if total_on_hold_goals > 0 else 0
 
@@ -387,23 +374,16 @@ def goal_status_chart(request):
         plt.figure(figsize=(5, 2))
         ax = sns.barplot(x=progress_percentages, y=status_labels, palette='dark:#5A9_r')
         ax.set(xlabel='Progress (%)', ylabel='Status')
-        # ax.xaxis.set_major_formatter(PercentFormatter(1, decimals=0))
         plt.title('Average Goal Progress')
-        plt.subplots_adjust(left=0.3, bottom=0.3)  # Keičiama kairioji grafiko dalis
+        plt.subplots_adjust(left=0.3, bottom=0.3)
         for i, v in enumerate(progress_percentages):
             ax.text(v + 0.02, i, f'{int(v * 100)}%', ha='left', va='center', color='white')
-
         tmpfile_progress_graph = 'goals_management/static/css/graphs/progress_graph.png'
         plt.savefig(tmpfile_progress_graph, format='png')
         plt.close()
 
-        # distribution_prog = base64.b64encode(tmpfile_progress_graph.getvalue()).decode('utf-8')
-        # context = {'goal_distribution': distribution, 'priority_distribution': distribution2, 'total_goals': total_goals, 'progress_distribution': distribution_prog}
-        # return render(request, 'goals_management\statistics.html', context)
     threading.Thread(target=generate_chart).start()
-
     total_goals = Goal.objects.filter(owner=request.user).count()
-
     context = {
         'priority_graph_path': 'static/css/graphs/priority_graph.png',
         'status_graph_path': 'static/css/graphs/status_graph.png',

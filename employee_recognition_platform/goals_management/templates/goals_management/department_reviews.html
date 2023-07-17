@@ -18,15 +18,13 @@
                 <option value="" selected disabled>No years available</option>
             {% endif %}
         </select>
-        
         <label for="employee"> <b><i>Employee:</b></i></label>
         <select id="employee" name="employee" class="select-with-label">
             <option value="">All</option>
             {% for employee in employees %}
                 <option value="{{ employee.id }}" {% if employee.id|stringformat:'s' == selected_employee %}selected{% endif %}>{{ employee }}</option>
             {% endfor %}
-        </select>
-        
+        </select>      
         <label for="review"><b><i>Review:</b></i></label>
         <select id="review" name="review" >
             <option value="">All</option>
@@ -34,7 +32,6 @@
                 <option value="{{ score }}" {% if score|stringformat:'s' == selected_review %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
         </select>
-        
         <button type="submit">Filter</button>
     </form>
 </div>
