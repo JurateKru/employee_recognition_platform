@@ -2,7 +2,7 @@
 {% block title %}profile in {{ block.super }}{% endblock title %}
 {% block content %}
 <div class="profile">
-  {% if user_ == request.user and not user.is_staff %}
+    {% if user_ == request.user and not user.is_staff %}
     <div class="profile-header">
       <h1>{{ user_.first_name }} {{ user_.last_name }}</h1>
       <h4>username: {{ user_ }}</h4>
@@ -14,7 +14,7 @@
         <div class="detail-row">
             <span class="detail-label"><i class="fas fa-users"></i></span>
             <span class="detail-value">Manager: {{ user_.employee.manager }}</span>
-          </div>
+        </div>
         <div class="detail-row">
           <span class="detail-label"><i class="far fa-envelope"></i></span>
           <span class="detail-value">{{ user_.email }}</span>
@@ -26,8 +26,8 @@
       </div>
       <a class="function-button" href="{% url 'profile_update' %}">Upload picture</a>
     </div>
-  {% endif %}
-  {% if user_ == request.user and user.is_staff %}
+    {% endif %}
+    {% if user_ == request.user and user.is_staff %}
     <div class="profile-header">
       <h1>{{ user_.manager.first_name }} {{ user_.manager.last_name }}</h1>
       <h4>username: {{ user_ }}</h4>
@@ -39,7 +39,7 @@
         <div class="detail-row">
             <span class="detail-label"><i class="fas fa-briefcase"></i></span>
             <span class="detail-value">Manager</span>
-          </div>
+        </div>
         <div class="detail-row">
           <span class="detail-label"><i class="far fa-envelope"></i></span>
           <span class="detail-value">{{ user_.manager.email }}</span>
@@ -51,6 +51,6 @@
       </div>
       <a class="function-button" href="{% url 'manager_profile' %}">Update picture</a>
     </div>
-  {% endif %}
+    {% endif %}
 </div>
 {% endblock content %}

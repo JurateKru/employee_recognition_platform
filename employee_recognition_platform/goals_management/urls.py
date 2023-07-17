@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('search/', views.search_view, name='search'),
     path('smart/', views.smart, name='smart'),
+    path('statistics/', views.goal_status_chart, name='statistics'),
     path('goals/', views.GoalListView.as_view(), name='goal_list'),
     path('employees/', views.DepartmentEmployeesListView.as_view(), name='employees_list'),
     path('employees/employee/<int:pk>/', views.EmployeeDetailView.as_view(), name='employee_detail'),
@@ -20,5 +21,4 @@ urlpatterns = [
     path('department-reviews/detail/<int:pk>/', views.ReviewDetailView.as_view(), name='review_detail'),
     path('department-reviews/detail/<int:pk>/update/', views.ReviewUpdateView.as_view(), name='update_review'),
     path('department-reviews/detail/<int:pk>/delete/', views.ReviewDeleteView.as_view(), name='delete_review'),
-    path('statistics/', views.goal_status_chart, name='statistics'),
 ]

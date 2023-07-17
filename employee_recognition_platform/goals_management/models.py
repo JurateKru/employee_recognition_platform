@@ -260,3 +260,4 @@ class GoalJournal(models.Model):
 
     def get_absolute_url(self):
         return reverse("goaljournal_detail", kwargs={"pk": self.pk})
+    

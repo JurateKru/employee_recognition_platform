@@ -54,15 +54,12 @@
             <td class="padding-buttom">{{ review.get_work_ethics_review_display }}</td>                              
         </tr>
         <tr>
-
             <td class="big" colspan="2"><b>Total Review:</b>{{ review.get_total_review_display }}</td>
         </tr>
         <tr>
             <td><b>Review created by: {{ review.manager }}</b></td>
         </tr>
-
     </table>
-
     {% else %}
         <p>No reviews found</p>
     {% endif %}

@@ -31,13 +31,13 @@
         </tr>
         <tr>
             <td>
-                <b>Start date:</b> <span class="detail-label"><i class="far fa-calendar-alt"></i></span>{{ goal.start_date|date:"Y-m-d" }}
+                <b>Start date:</b><span class="detail-label"><i class="far fa-calendar-alt"></i></span>{{ goal.start_date|date:"Y-m-d" }}
             </td>
         </tr>
         <tr>
             <td>
                 <div class='table-spacing'>
-                    <b>End date:</b> <span class="detail-label"><i class="far fa-calendar-alt"></i></span> {{ goal.end_date|date:"Y-m-d" }}  
+                    <b>End date:</b><span class="detail-label"><i class="far fa-calendar-alt"></i></span> {{ goal.end_date|date:"Y-m-d" }}  
                 </div>  
             </td>
         </tr>
@@ -48,16 +48,16 @@
                 <div class='table-spacing-2'>
                     <div>
                         <b>Status:</b> {% if goal.status == 0 %}
-                        <span style="color: orange;"><strong>Planned</strong></span>
-                    {% elif goal.status == 1 %}
-                        <span style="color: rgb(35, 80, 186);"><strong>In progress</strong></span>
-                    {% elif goal.status == 2 %}
-                        <span style="color: green;"><strong>Complete</strong></span>
-                    {% elif goal.status == 3 %}
-                        <span style="color: grey;"><strong>On hold</strong></span>
-                    {% elif goal.status == 4 %}
-                        <span style="color: red;"><strong>Cancelled</strong></span>
-                    {% endif %}
+                        <span style="color: #bb6e20;"><strong> Planned</strong></span>
+                        {% elif goal.status == 1 %} 
+                            <span style="color: rgb(35, 80, 186);"><strong> In progress</strong></span>
+                        {% elif goal.status == 2 %} 
+                            <span style="color: green;"><strong> Complete</strong></span>
+                        {% elif goal.status == 3 %} 
+                            <span style="color: rgb(81, 81, 81);"><strong> On hold</strong></span>
+                        {% elif goal.status == 4 %} 
+                            <span style="color: rgb(200, 9, 9);"><strong> Cancelled</strong></span>
+                        {% endif %}
                     </div>
                 </div>
             </td>
@@ -68,11 +68,11 @@
         <tr>
             <td>
                 <div class="progress-bar">
-                <div class="progress-bar-all"></div>
-                <div class="progress-bar-goal" style="width: {{ goal.progress }}%;"></div>
-                <div class="start-text">Start 0%</div>
-                <div class="end-text">Goal 100%</div>
-                <div class="current-text">Current {{ goal.progress }}%</div>
+                    <div class="progress-bar-all"></div>
+                    <div class="progress-bar-goal" style="width: {{ goal.progress }}%;"></div>
+                    <div class="start-text">Start 0%</div>
+                    <div class="end-text">Goal 100%</div>
+                    <div class="current-text">Current {{ goal.progress }}%</div>
                 </div>
             </td>
         </tr>
@@ -85,7 +85,6 @@
             <a class='function-button' href="{% url 'delete_goal' goal.pk %}">Delete Goal</a>
     {% endif %}
 </div>
-
 <div class="journal-section">
     <h3>Goal Journal:</h3>
     {% if goal.journals.count > 0 %}
@@ -116,6 +115,4 @@
         <p class="box box-info">If you want to add a journal, you have to <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sing up</a></p>
     {% endif %}
 </div>
-
-
 {% endblock content %}
